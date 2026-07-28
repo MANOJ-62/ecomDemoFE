@@ -87,7 +87,7 @@ export default function OrderSuccessPage() {
                   <Home className="text-gray-600" size={24} />
                 </div>
                 <p className="font-semibold text-gray-600 text-sm">Delivery</p>
-                <p className="text-xs text-gray-600 mt-1">5-7 days</p>
+                <p className="text-xs text-gray-600 mt-1">3-5 days</p>
               </div>
             </motion.div>
 
@@ -130,8 +130,8 @@ export default function OrderSuccessPage() {
               className="text-gray-600 text-sm"
             >
               Need help? Contact our support team at{' '}
-              <a href="mailto:support@mini.com" className="text-emerald-600 hover:text-emerald-700 font-semibold">
-                support@mini.com
+              <a href="mailto:rakesh23sep2000@gmail.com" className="text-emerald-600 hover:text-emerald-700 font-semibold">
+                rakesh23sep2000@gmail.com
               </a>
             </motion.p>
           </motion.div>

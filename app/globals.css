@@ -2,6 +2,13 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 
+@keyframes delivery-marquee {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+
+.delivery-marquee { animation: delivery-marquee 18s linear infinite; }
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

@@ -14,6 +14,7 @@ export interface Product {
   servings?: number
   weight?: string
   flavors?: string[]
+  flavorImages?: Record<string, string>
   nutritionInfo?: string
   allergenInfo?: string
   storageInstructions?: string

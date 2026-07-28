@@ -28,6 +28,7 @@ export function mapProductResponseToProduct(dto: ProductResponse): Product {
     ingredients: dto.ingredients ?? [],
     weight: dto.netWeight,
     flavors: dto.flavors ?? [],
+    flavorImages: dto.flavorImages ?? {},
     nutritionInfo: dto.nutritionInfo,
     allergenInfo: dto.allergenInfo,
     storageInstructions: dto.storageInstructions,

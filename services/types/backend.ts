@@ -41,6 +41,7 @@ export interface ProductResponse {
   active: boolean
   featured: boolean
   flavors?: string[]
+  flavorImages?: Record<string, string>
   highlights?: string[]
   ingredients?: string[]
   images?: string[]

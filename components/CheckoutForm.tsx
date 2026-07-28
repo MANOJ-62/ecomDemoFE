@@ -126,7 +126,7 @@ export const CheckoutForm = ({ onSubmit, isLoading }: CheckoutFormProps) => {
           <input
             {...register('city')}
             className="input-field"
-            placeholder="New York"
+            placeholder="Chennai"
           />
           {errors.city && (
             <p className="text-red-600 text-xs mt-1">{errors.city.message}</p>
@@ -140,7 +140,7 @@ export const CheckoutForm = ({ onSubmit, isLoading }: CheckoutFormProps) => {
           <input
             {...register('state')}
             className="input-field"
-            placeholder="NY"
+            placeholder="Tamil Nadu"
           />
           {errors.state && (
             <p className="text-red-600 text-xs mt-1">{errors.state.message}</p>
@@ -167,10 +167,11 @@ export const CheckoutForm = ({ onSubmit, isLoading }: CheckoutFormProps) => {
         <label className="block text-sm font-medium text-gray-700 mb-1">
           Country
         </label>
+          
         <input
           {...register('country')}
           className="input-field"
-          placeholder="USA"
+          placeholder="India"
         />
         {errors.country && (
           <p className="text-red-600 text-xs mt-1">{errors.country.message}</p>

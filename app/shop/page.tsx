@@ -11,6 +11,13 @@ import { ApiResponse } from '@/services/types/backend'
 import { Product } from '@/types'
 import api, { unwrapApiResponse } from '@/services/apiClient'
 import { getProductsPage } from '@/services/products'
+import Link from 'next/link'
+
+const featuredSlides = [
+  { title: 'Mini Thins', flavor: 'Cream N Onion', copy: 'A light, crunchy corn snack with a creamy onion twist.', image: '/products/hangrow/mini-thins-cream-n-onion.jpeg', href: '/product/1?flavor=Cream%20N%20Onion', tone: 'from-purple-950/80 to-purple-600/30' },
+  { title: 'Hangrow Thins', flavor: 'Lime N Lemon', copy: 'Zesty citrus flavour with the satisfying crunch of puffed thins.', image: '/products/hangrow/thins-lime-n-lemon.jpeg', href: '/product/2?flavor=Lime%20N%20Lemon', tone: 'from-lime-950/80 to-lime-600/30' },
+  { title: 'Hangrow Thins', flavor: 'Cheese Magic', copy: 'A bold cheesy crunch for every snack break.', image: '/products/hangrow/thins-cheese-magic.jpeg', href: '/product/2?flavor=Cheese%20Magic', tone: 'from-orange-950/80 to-orange-600/30' },
+]
 
 export default function ShopPage() {
   const [selectedCategory, setSelectedCategory] = useState('All Products')
@@ -18,6 +25,12 @@ export default function ShopPage() {
   const [priceRange, setPriceRange] = useState<number[]>([])
   const [minRating, setMinRating] = useState<number | null>(null)
   const [sortBy, setSortBy] = useState('newest')
+  const [activeSlide, setActiveSlide] = useState(0)
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setActiveSlide((current) => (current + 1) % featuredSlides.length), 5000)
+    return () => window.clearInterval(timer)
+  }, [])
 
   useEffect(() => {
     getShopCategories()
@@ -110,6 +123,18 @@ export default function ShopPage() {
       <Header />
 
       <main className="flex-1">
+        <section className="container-custom pt-8">
+          <div className="relative min-h-[300px] overflow-hidden rounded-3xl shadow-xl bg-gray-900">
+            {featuredSlides.map((slide, index) => (
+              <div key={slide.flavor} className={`absolute inset-0 transition-opacity duration-700 ${activeSlide === index ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                <img src={slide.image} alt={`${slide.title} ${slide.flavor}`} className="absolute inset-0 w-full h-full object-cover object-center" />
+                <div className={`absolute inset-0 bg-gradient-to-r ${slide.tone}`} />
+                <div className="relative h-full min-h-[300px] flex items-center px-8 sm:px-14 text-white max-w-xl"><div><p className="text-sm uppercase tracking-[0.25em] font-bold text-yellow-300 mb-3">Best seller</p><h2 className="text-4xl sm:text-5xl font-black mb-2">{slide.title}</h2><p className="text-xl font-semibold mb-4">{slide.flavor}</p><p className="text-white/90 mb-7">{slide.copy}</p><Link href={slide.href} className="inline-block rounded-lg bg-white px-5 py-3 font-bold text-purple-800 hover:bg-yellow-100">Shop now</Link></div></div>
+              </div>
+            ))}
+            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">{featuredSlides.map((slide, index) => <button key={slide.flavor} aria-label={`Show ${slide.flavor}`} onClick={() => setActiveSlide(index)} className={`h-2.5 rounded-full transition-all ${activeSlide === index ? 'w-7 bg-white' : 'w-2.5 bg-white/60'}`} />)}</div>
+          </div>
+        </section>
         {/* Header */}
         <section className="container-custom py-12">
           <motion.div
@@ -163,9 +188,9 @@ export default function ShopPage() {
                 <h3 className="text-lg font-bold text-gray-900 mb-4">Price Range</h3>
                 <div className="space-y-3 text-sm">
                   {[
-                    { label: '$0 - $5', value: 0 },
-                    { label: '$5 - $10', value: 1 },
-                    { label: '$10+', value: 2 },
+                    { label: '₹0 - ₹5', value: 0 },
+                    { label: '₹5 - ₹10', value: 1 },
+                    { label: '₹10+', value: 2 },
                   ].map(({ label, value }) => (
                     <label key={value} className="flex items-center gap-3 cursor-pointer group">
                       <input

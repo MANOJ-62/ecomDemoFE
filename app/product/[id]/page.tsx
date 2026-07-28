@@ -23,6 +23,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: number }
   const [quantity, setQuantity] = useState(1)
   const [isAddedToCart, setIsAddedToCart] = useState(false)
   const [selectedFlavor, setSelectedFlavor] = useState('')
+  const productImage = selectedFlavor ? product?.flavorImages?.[selectedFlavor] ?? product?.image : product?.image
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -43,6 +44,13 @@ export default function ProductPage({ params }: { params: Promise<{ id: number }
   
     fetchProduct()
   }, [id])
+
+  useEffect(() => {
+    const requestedFlavor = new URLSearchParams(window.location.search).get('flavor')
+    if (requestedFlavor && product?.flavors?.includes(requestedFlavor)) {
+      setSelectedFlavor(requestedFlavor)
+    }
+  }, [product])
   
   
   if (isLoading) {
@@ -118,7 +126,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: number }
                 className="flex items-center justify-center"
               >
                 <img
-                  src={product.image}
+                  src={productImage}
                   alt={product.name}
                   className="w-full h-full object-contain rounded-xl"
                 />

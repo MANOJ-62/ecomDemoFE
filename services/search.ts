@@ -110,9 +110,9 @@ export const advancedSearch = async (filters: SearchFilters) => {
     facets: {
       categories: Array.from(new Set(results.products.map((product) => product.category))),
       priceRanges: [
-        { min: 0, max: 25, label: '$0 - $25' },
-        { min: 25, max: 50, label: '$25 - $50' },
-        { min: 50, max: Infinity, label: '$50+' },
+        { min: 0, max: 25, label: '₹0 - ₹25' },
+        { min: 25, max: 50, label: '₹25 - ₹50' },
+        { min: 50, max: Infinity, label: '₹50+' },
       ],
       ratings: [5, 4, 3, 2, 1],
     },

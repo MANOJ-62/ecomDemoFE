@@ -34,6 +34,9 @@ export const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-gradient-to-r from-purple-50 to-orange-50 border-b-2 border-purple-200 shadow-md">
+      <div className="overflow-hidden bg-purple-700 text-white whitespace-nowrap py-1.5 text-xs font-semibold tracking-wide">
+        <div className="delivery-marquee inline-block">FREE DELIVERY on orders above ₹500 &nbsp;•&nbsp; Healthy snacking delivered to your doorstep &nbsp;•&nbsp; FREE DELIVERY on orders above ₹500</div>
+      </div>
       <div className="container-custom">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}

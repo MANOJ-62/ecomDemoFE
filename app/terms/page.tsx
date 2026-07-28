@@ -69,7 +69,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">6. Contact Information</h2>
               <p>
-                For questions about these Terms, please contact us at support@mini.com
+                For questions about these Terms, please contact us at rakesh23sep2000@gmail.com
               </p>
             </section>
           </motion.div>

@@ -113,7 +113,7 @@ export default function Home() {
                 {
                   icon: Zap,
                   title: 'Fast Shipping',
-                  description: 'Free shipping on orders over $50, delivered in 5-7 business days',
+                  description: 'Free shipping on orders over ₹50, delivered in 2-3 business days',
                 },
                 {
                   icon: Heart,

@@ -48,7 +48,7 @@ export default function ReturnsPage() {
                   icon: Package,
                   step: 1,
                   title: 'Contact Us',
-                  desc: 'Email support@mini.com with your order number',
+                  desc: 'Email rakesh23sep2000@gmail.com with your order number',
                 },
                 {
                   icon: Clock,

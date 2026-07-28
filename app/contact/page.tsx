@@ -77,7 +77,7 @@ export default function ContactPage() {
                     <Mail className="text-emerald-600" size={24} />
                   </div>
                   <h3 className="font-bold text-gray-900 mb-2">Email</h3>
-                  <p className="text-gray-600">support@mini.com</p>
+                  <p className="text-gray-600">rakesh23sep2000@gmail.com</p>
                   <p className="text-sm text-gray-500 mt-2">We reply within 24 hours</p>
                 </div>
 
@@ -86,7 +86,7 @@ export default function ContactPage() {
                     <Phone className="text-emerald-600" size={24} />
                   </div>
                   <h3 className="font-bold text-gray-900 mb-2">Phone</h3>
-                  <p className="text-gray-600">(555) 123-4567</p>
+                  <p className="text-gray-600">(+91) xxxxxxxxxx</p>
                   <p className="text-sm text-gray-500 mt-2">Mon-Fri, 9am-5pm EST</p>
                 </div>
 
@@ -97,7 +97,7 @@ export default function ContactPage() {
                   <h3 className="font-bold text-gray-900 mb-2">Address</h3>
                   <p className="text-gray-600">
                     123 Wellness Street<br />
-                    Health City, HC 12345
+                    Health City, Chennai 600095
                   </p>
                 </div>
               </motion.div>
@@ -193,7 +193,7 @@ export default function ContactPage() {
               {[
                 {
                   q: 'How long does shipping take?',
-                  a: 'Orders are typically shipped within 24 hours. Delivery takes 5-7 business days depending on your location.',
+                  a: 'Orders are typically shipped within 24 hours. Delivery takes 3-5 business days depending on your location.',
                 },
                 {
                   q: 'Do you offer international shipping?',

@@ -13,10 +13,10 @@ export default function ProfilePage() {
     email: 'john.doe@example.com',
     phone: '(555) 123-4567',
     address: '123 Main Street',
-    city: 'New York',
-    state: 'NY',
+    city: 'Chennai',
+    state: 'Tamil Nadu',
     zipCode: '10001',
-    country: 'USA',
+    country: 'India',
     joinedDate: 'March 2024',
   }
 
@@ -113,9 +113,9 @@ export default function ProfilePage() {
 
                   <div className="space-y-4">
                     {[
-                      { id: 'ORD-001', date: 'June 1, 2024', status: 'Delivered', amount: '$84.88' },
-                      { id: 'ORD-002', date: 'May 25, 2024', status: 'Delivered', amount: '$56.99' },
-                      { id: 'ORD-003', date: 'May 15, 2024', status: 'Delivered', amount: '$124.50' },
+                      { id: 'ORD-001', date: 'June 1, 2024', status: 'Delivered', amount: '₹84.88' },
+                      { id: 'ORD-002', date: 'May 25, 2024', status: 'Delivered', amount: '₹56.99' },
+                      { id: 'ORD-003', date: 'May 15, 2024', status: 'Delivered', amount: '₹124.50' },
                     ].map((order) => (
                       <div key={order.id} className="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200">
                         <div>

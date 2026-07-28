@@ -70,11 +70,11 @@ export const Footer = () => {
               </li>
               <li className="flex items-center gap-2">
                 <Mail size={16} className="text-emerald-400" />
-                <span>support@mini.com</span>
+                <span>rakesh23sep2000@gmail.com</span>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin size={16} className="text-emerald-400 mt-0.5" />
-                <span>123 Wellness St, Health City, HC 12345</span>
+                <span>123 Wellness St, Health City, Chennai 600095</span>
               </li>
             </ul>
           </div>
@@ -83,7 +83,7 @@ export const Footer = () => {
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-gray-400">
-              © 2024 Mini Ecommerce. All rights reserved.
+              © 2026 RAK - Ecommerce. All rights reserved.
             </p>
             <div className="flex gap-4 mt-4 md:mt-0">
               <a href="#" className="text-gray-400 hover:text-emerald-400 transition-colors">
