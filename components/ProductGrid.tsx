@@ -13,21 +13,21 @@ export const ProductGrid = ({ products, isLoading }: ProductGridProps) => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <Loader className="animate-spin text-emerald-600" size={32} />
+        <Loader className="animate-spin text-[#ff4d00]" size={32} />
       </div>
     )
   }
 
   if (products.length === 0) {
     return (
-      <div className="text-center py-12">
-        <p className="text-gray-600">No products found. Try adjusting your filters.</p>
+      <div className="electric-card text-center py-14 px-6">
+        <p className="font-bold text-black/60">No snacks found. Try adjusting your filters.</p>
       </div>
     )
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

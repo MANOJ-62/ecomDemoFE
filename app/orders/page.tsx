@@ -23,16 +23,17 @@ export default function OrdersPage() {
     getMyOrders().then(setOrders).catch(() => setError('Unable to load your orders.')).finally(() => setLoading(false))
   }, [router])
 
-  return <div className="min-h-screen bg-white flex flex-col">
+  return <div className="min-h-screen bg-[#fff8eb] flex flex-col">
     <Header />
     <main className="flex-1 container-custom py-12">
-      <h1 className="text-4xl font-bold text-gray-900 mb-2">Order History</h1>
+      <span className="electric-kicker mb-5">Your snack trail</span>
+      <h1 className="electric-title text-5xl md:text-7xl text-gray-900 mb-3">Order history</h1>
       <p className="text-gray-600 mb-8">Your orders are loaded from your account.</p>
       {loading && <Loader className="animate-spin text-emerald-600" />}
       {error && <p className="text-red-600">{error}</p>}
       {!loading && !error && orders.length === 0 && <div className="py-16 text-center text-gray-600"><Package className="mx-auto mb-3 text-gray-300" size={48} />You have not placed any orders yet.</div>}
       <div className="space-y-4">
-        {orders.map((order) => <article key={order.id} className="border border-gray-200 rounded-lg p-6">
+        {orders.map((order) => <article key={order.id} className="electric-card p-6">
           <div className="flex flex-wrap justify-between gap-4 border-b border-gray-100 pb-4">
             <div><p className="text-sm text-gray-500">Order</p><p className="font-bold text-gray-900">{order.id}</p></div>
             <div><p className="text-sm text-gray-500">Placed</p><p>{new Date(order.createdAt).toLocaleDateString()}</p></div>

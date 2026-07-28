@@ -284,7 +284,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-amber-50 to-orange-50 flex flex-col">
       <Header />
 
       <main className="flex-1 flex items-center justify-center px-4 py-12">
@@ -295,11 +295,11 @@ export default function RegisterPage() {
           className="w-full max-w-md"
         >
           {/* Card */}
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-purple-200">
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-emerald-200">
             {/* Progress Bar */}
             <div className="h-1 bg-gray-200">
               <motion.div
-                className="h-full bg-gradient-to-r from-purple-600 to-pink-600"
+                className="h-full bg-gradient-to-r from-emerald-600 to-amber-600"
                 animate={{ width: `${progressPercentage[step]}%` }}
                 transition={{ duration: 0.3 }}
               />
@@ -324,21 +324,21 @@ export default function RegisterPage() {
 
               {/* Step Indicator */}
               <div className="flex justify-between mb-6 text-sm">
-                <div className={`text-center ${step === 'email' ? 'text-purple-600 font-semibold' : 'text-gray-500'}`}>
+                <div className={`text-center ${step === 'email' ? 'text-emerald-600 font-semibold' : 'text-gray-500'}`}>
                   <div className="w-6 h-6 rounded-full border-2 mx-auto mb-1 flex items-center justify-center"
                     style={{ borderColor: progressPercentage[step] >= 25 ? '#9333ea' : '#d1d5db' }}>
                     1
                   </div>
                 </div>
                 <div className="flex-1 border-t-2 mx-2 mt-3" style={{ borderColor: progressPercentage[step] >= 50 ? '#9333ea' : '#d1d5db' }} />
-                <div className={`text-center ${step === 'otp' ? 'text-purple-600 font-semibold' : 'text-gray-500'}`}>
+                <div className={`text-center ${step === 'otp' ? 'text-emerald-600 font-semibold' : 'text-gray-500'}`}>
                   <div className="w-6 h-6 rounded-full border-2 mx-auto mb-1 flex items-center justify-center"
                     style={{ borderColor: progressPercentage[step] >= 50 ? '#9333ea' : '#d1d5db' }}>
                     2
                   </div>
                 </div>
                 <div className="flex-1 border-t-2 mx-2 mt-3" style={{ borderColor: progressPercentage[step] >= 75 ? '#9333ea' : '#d1d5db' }} />
-                <div className={`text-center ${step === 'details' ? 'text-purple-600 font-semibold' : 'text-gray-500'}`}>
+                <div className={`text-center ${step === 'details' ? 'text-emerald-600 font-semibold' : 'text-gray-500'}`}>
                   <div className="w-6 h-6 rounded-full border-2 mx-auto mb-1 flex items-center justify-center"
                     style={{ borderColor: progressPercentage[step] >= 75 ? '#9333ea' : '#d1d5db' }}>
                     3
@@ -362,7 +362,7 @@ export default function RegisterPage() {
                         Email Address *
                       </label>
                       <div className="relative">
-                        <Mail className="absolute left-3 top-3 text-purple-600" size={20} />
+                        <Mail className="absolute left-3 top-3 text-emerald-600" size={20} />
                         <input
                           type="email"
                           value={formData.email}
@@ -371,7 +371,7 @@ export default function RegisterPage() {
                           className={`w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:outline-none transition ${
                             errors.email
                               ? 'border-red-500 focus:border-red-600'
-                              : 'border-gray-200 focus:border-purple-600'
+                              : 'border-gray-200 focus:border-emerald-600'
                           }`}
                         />
                       </div>
@@ -409,7 +409,7 @@ export default function RegisterPage() {
 
                     <p className="text-center text-sm text-gray-600 mt-6">
                       Already have an account?{' '}
-                      <Link href="/login" className="text-purple-600 font-semibold hover:underline">
+                      <Link href="/login" className="text-emerald-600 font-semibold hover:underline">
                         Sign In
                       </Link>
                     </p>
@@ -442,7 +442,7 @@ export default function RegisterPage() {
                         className={`w-full px-4 py-4 border-2 rounded-lg text-center text-2xl tracking-widest font-mono focus:outline-none transition ${
                           errors.otp
                             ? 'border-red-500 focus:border-red-600'
-                            : 'border-gray-200 focus:border-purple-600'
+                            : 'border-gray-200 focus:border-emerald-600'
                         }`}
                       />
                       {errors.otp && (
@@ -513,7 +513,7 @@ export default function RegisterPage() {
                         type="button"
                         onClick={handleResendOtp}
                         disabled={isSubmitting || expiryTime > 240} // Show after 1 minute
-                        className="flex-1 px-4 py-2 border-2 border-purple-600 text-purple-600 rounded-lg hover:bg-purple-50 transition disabled:opacity-50"
+                        className="flex-1 px-4 py-2 border-2 border-emerald-600 text-emerald-600 rounded-lg hover:bg-emerald-50 transition disabled:opacity-50"
                       >
                         <Send className="inline mr-2" size={18} />
                         Resend
@@ -538,7 +538,7 @@ export default function RegisterPage() {
                         First Name *
                       </label>
                       <div className="relative">
-                        <User className="absolute left-3 top-3 text-purple-600" size={20} />
+                        <User className="absolute left-3 top-3 text-emerald-600" size={20} />
                         <input
                           type="text"
                           value={formData.firstName}
@@ -547,7 +547,7 @@ export default function RegisterPage() {
                           className={`w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:outline-none transition ${
                             errors.firstName
                               ? 'border-red-500 focus:border-red-600'
-                              : 'border-gray-200 focus:border-purple-600'
+                              : 'border-gray-200 focus:border-emerald-600'
                           }`}
                         />
                       </div>
@@ -565,13 +565,13 @@ export default function RegisterPage() {
                         Last Name
                       </label>
                       <div className="relative">
-                        <User className="absolute left-3 top-3 text-purple-600" size={20} />
+                        <User className="absolute left-3 top-3 text-emerald-600" size={20} />
                         <input
                           type="text"
                           value={formData.lastName}
                           onChange={(e) => handleInputChange(e, 'lastName')}
                           placeholder="Doe"
-                          className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-600 transition"
+                          className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-emerald-600 transition"
                         />
                       </div>
                     </div>
@@ -582,13 +582,13 @@ export default function RegisterPage() {
                         Phone Number
                       </label>
                       <div className="relative">
-                        <Phone className="absolute left-3 top-3 text-purple-600" size={20} />
+                        <Phone className="absolute left-3 top-3 text-emerald-600" size={20} />
                         <input
                           type="tel"
                           value={formData.phone}
                           onChange={(e) => handleInputChange(e, 'phone')}
                           placeholder="+1 (555) 000-0000"
-                          className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-600 transition"
+                          className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-emerald-600 transition"
                         />
                       </div>
                     </div>
@@ -599,7 +599,7 @@ export default function RegisterPage() {
                         Password *
                       </label>
                       <div className="relative">
-                        <Lock className="absolute left-3 top-3 text-purple-600" size={20} />
+                        <Lock className="absolute left-3 top-3 text-emerald-600" size={20} />
                         <input
                           type="password"
                           value={formData.password}
@@ -608,7 +608,7 @@ export default function RegisterPage() {
                           className={`w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:outline-none transition ${
                             errors.password
                               ? 'border-red-500 focus:border-red-600'
-                              : 'border-gray-200 focus:border-purple-600'
+                              : 'border-gray-200 focus:border-emerald-600'
                           }`}
                         />
                       </div>
@@ -629,7 +629,7 @@ export default function RegisterPage() {
                         Confirm Password *
                       </label>
                       <div className="relative">
-                        <Lock className="absolute left-3 top-3 text-purple-600" size={20} />
+                        <Lock className="absolute left-3 top-3 text-emerald-600" size={20} />
                         <input
                           type="password"
                           value={formData.confirmPassword}
@@ -638,7 +638,7 @@ export default function RegisterPage() {
                           className={`w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:outline-none transition ${
                             errors.confirmPassword
                               ? 'border-red-500 focus:border-red-600'
-                              : 'border-gray-200 focus:border-purple-600'
+                              : 'border-gray-200 focus:border-emerald-600'
                           }`}
                         />
                       </div>
@@ -718,7 +718,7 @@ export default function RegisterPage() {
                       Welcome to FoodZone! You&apos;re being redirected to login...
                     </p>
                     <div className="flex justify-center">
-                      <Loader className="animate-spin text-purple-600" size={24} />
+                      <Loader className="animate-spin text-emerald-600" size={24} />
                     </div>
                   </motion.div>
                 )}
@@ -734,11 +734,11 @@ export default function RegisterPage() {
                 >
                   <p>
                     By registering, you agree to our{' '}
-                    <Link href="/terms" className="text-purple-600 hover:underline">
+                    <Link href="/terms" className="text-emerald-600 hover:underline">
                       Terms of Service
                     </Link>{' '}
                     and{' '}
-                    <Link href="/privacy" className="text-purple-600 hover:underline">
+                    <Link href="/privacy" className="text-emerald-600 hover:underline">
                       Privacy Policy
                     </Link>
                   </p>

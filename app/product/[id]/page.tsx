@@ -112,23 +112,23 @@ export default function ProductPage({ params }: { params: Promise<{ id: number }
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-[#fff8eb] flex flex-col">
       <Header />
 
       <main className="flex-1">
         <div className="container-custom py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
             {/* Product Image */}
             <div className="space-y-6">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="flex items-center justify-center"
+                className="flex min-h-[480px] items-center justify-center rounded-[2rem] border-2 border-black bg-[#ffd92f] p-8 shadow-[8px_8px_0_#16130f]"
               >
                 <img
                   src={productImage}
                   alt={product.name}
-                  className="w-full h-full object-contain rounded-xl"
+                  className="max-h-[520px] w-full object-contain drop-shadow-2xl"
                 />
               </motion.div>
 
@@ -190,7 +190,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: number }
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="space-y-6"
+              className="space-y-6 md:py-5"
             >
               {/* Category Badge */}
               <div className="flex items-center gap-2">
@@ -204,7 +204,8 @@ export default function ProductPage({ params }: { params: Promise<{ id: number }
 
               {/* Title */}
               <div>
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                <p className="electric-kicker mb-5">Crave-worthy pick</p>
+                <h1 className="electric-title text-5xl md:text-6xl text-gray-900 mb-5">
                   {product.name}
                 </h1>
                 <p className="text-lg text-gray-700 mb-4">{product.description}</p>
@@ -234,8 +235,8 @@ export default function ProductPage({ params }: { params: Promise<{ id: number }
               </div>*/}
 
               {/* Price */}
-              <div className="text-4xl font-bold text-gray-900">
-                ${product.price.toFixed(2)}
+              <div className="text-4xl font-black text-gray-900">
+                ₹{product.price.toFixed(2)}
               </div>
               {/* Flavors */}
               {product.flavors && product.flavors.length > 0 && (
@@ -257,7 +258,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: number }
 
               {/* Quantity and Add to Cart */}
               <div className="flex gap-4 pt-4">
-                <div className="flex items-center border border-gray-300 rounded-lg">
+                <div className="flex items-center border-2 border-black rounded-full bg-white overflow-hidden">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     className="px-4 py-3 text-gray-600 hover:text-gray-900"
@@ -284,7 +285,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: number }
                 </button>
                 <button
                   onClick={() => toggleWishlist(product.id)}
-                  className="px-6 py-3 border-2 border-emerald-600 text-emerald-600 rounded-lg font-semibold hover:bg-emerald-50 transition-colors"
+                  className="px-6 py-3 border-2 border-black bg-[#ef9cff] text-black rounded-full font-bold transition-transform hover:-translate-y-1"
                 >
                   <Heart
                     size={20}

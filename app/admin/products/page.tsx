@@ -35,7 +35,7 @@ export default function AdminProductsPage() {
         </div>
         <Link
           href="/admin/products/new"
-          className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all"
+          className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-amber-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all"
         >
           <Plus size={20} />
           Add Product
@@ -51,7 +51,7 @@ export default function AdminProductsPage() {
             placeholder="Search products..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+            className="w-full pl-10 pr-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-emerald-600"
           />
         </div>
       </motion.div>
@@ -61,7 +61,7 @@ export default function AdminProductsPage() {
         {isLoading ? (
           <div className="flex items-center justify-center h-96">
             <div className="text-center">
-              <div className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+              <div className="w-12 h-12 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
               <p className="text-gray-600">Loading products...</p>
             </div>
           </div>
@@ -88,7 +88,7 @@ export default function AdminProductsPage() {
                   <tr key={product.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 font-medium text-gray-900">{product.name}</td>
                     <td className="px-6 py-4 text-gray-600">{product.category}</td>
-                    <td className="px-6 py-4 font-semibold text-purple-600">${product.price}</td>
+                    <td className="px-6 py-4 font-semibold text-emerald-600">${product.price}</td>
                     <td className="px-6 py-4">
                       <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                         product.stock > 0
@@ -119,7 +119,7 @@ export default function AdminProductsPage() {
                       <div className="flex items-center gap-3">
                         <Link
                           href={`/admin/products/${product.id}`}
-                          className="text-purple-600 hover:text-purple-700 font-medium"
+                          className="text-emerald-600 hover:text-emerald-700 font-medium"
                         >
                           <Edit2 size={18} />
                         </Link>

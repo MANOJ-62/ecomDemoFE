@@ -8,7 +8,7 @@ import { CheckCircle, Package, Truck, Home } from 'lucide-react'
 
 export default function OrderSuccessPage() {
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-[#fff8eb] flex flex-col">
       <Header />
 
       <main className="flex-1">
@@ -17,7 +17,7 @@ export default function OrderSuccessPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="max-w-2xl mx-auto text-center space-y-8"
+            className="electric-card max-w-2xl mx-auto text-center space-y-8 p-8 md:p-12"
           >
             {/* Success Icon */}
             <motion.div
@@ -37,7 +37,7 @@ export default function OrderSuccessPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+              <h1 className="electric-title text-5xl sm:text-6xl text-gray-900 mb-4">
                 Order Confirmed!
               </h1>
               <p className="text-xl text-gray-600 mb-2">

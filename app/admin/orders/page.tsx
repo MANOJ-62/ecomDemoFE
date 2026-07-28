@@ -9,7 +9,7 @@ import { Eye, Filter } from 'lucide-react'
 const STATUS_COLORS = {
   pending: 'bg-yellow-100 text-yellow-700',
   processing: 'bg-blue-100 text-blue-700',
-  shipped: 'bg-purple-100 text-purple-700',
+  shipped: 'bg-emerald-100 text-emerald-700',
   delivered: 'bg-green-100 text-green-700',
   cancelled: 'bg-red-100 text-red-700',
 }
@@ -50,7 +50,7 @@ export default function AdminOrdersPage() {
           onClick={() => { setStatusFilter(undefined); setPage(1); }}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
             !statusFilter
-              ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
+              ? 'bg-gradient-to-r from-emerald-600 to-amber-600 text-white'
               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
           }`}
         >
@@ -63,7 +63,7 @@ export default function AdminOrdersPage() {
             onClick={() => { setStatusFilter(status); setPage(1); }}
             className={`px-4 py-2 rounded-lg font-medium transition-all capitalize ${
               statusFilter === status
-                ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
+                ? 'bg-gradient-to-r from-emerald-600 to-amber-600 text-white'
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
             }`}
           >
@@ -77,7 +77,7 @@ export default function AdminOrdersPage() {
         {isLoading ? (
           <div className="flex items-center justify-center h-96">
             <div className="text-center">
-              <div className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+              <div className="w-12 h-12 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
               <p className="text-gray-600">Loading orders...</p>
             </div>
           </div>
@@ -102,7 +102,7 @@ export default function AdminOrdersPage() {
               <tbody className="divide-y divide-gray-200">
                 {orders.map((order) => (
                   <tr key={order.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 font-mono font-semibold text-purple-600">{order.id}</td>
+                    <td className="px-6 py-4 font-mono font-semibold text-emerald-600">{order.id}</td>
                     <td className="px-6 py-4">
                       <div>
                         <p className="font-medium text-gray-900">{order.customer.name}</p>
@@ -138,7 +138,7 @@ export default function AdminOrdersPage() {
                     <td className="px-6 py-4">
                       <Link
                         href={`/admin/orders/${order.id}`}
-                        className="text-purple-600 hover:text-purple-700 font-medium flex items-center gap-1"
+                        className="text-emerald-600 hover:text-emerald-700 font-medium flex items-center gap-1"
                       >
                         <Eye size={18} />
                         View

@@ -47,7 +47,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-amber-50 to-orange-50 flex flex-col">
       <Header />
 
       <main className="flex-1 flex items-center justify-center px-4 py-12">
@@ -58,7 +58,7 @@ export default function LoginPage() {
           className="w-full max-w-md"
         >
           {/* Card */}
-          <div className="bg-white rounded-2xl shadow-xl p-8 border border-purple-200">
+          <div className="bg-white rounded-2xl shadow-xl p-8 border border-emerald-200">
             {/* Header */}
             <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
               <h1 className="text-3xl font-bold gradient-text mb-2">Welcome to FoodZone</h1>
@@ -83,14 +83,14 @@ export default function LoginPage() {
     </label>
 
     <div className="relative">
-      <Mail className="absolute left-3 top-3 text-purple-600" size={20} />
+      <Mail className="absolute left-3 top-3 text-emerald-600" size={20} />
 
       <input
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="your@email.com"
-        className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-600"
+        className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-emerald-600"
       />
     </div>
   </div>
@@ -101,14 +101,14 @@ export default function LoginPage() {
     </label>
 
     <div className="relative">
-      <Lock className="absolute left-3 top-3 text-purple-600" size={20} />
+      <Lock className="absolute left-3 top-3 text-emerald-600" size={20} />
 
       <input
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Enter password"
-        className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-600"
+        className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-emerald-600"
       />
     </div>
   </div>
@@ -142,7 +142,7 @@ export default function LoginPage() {
 
   <p className="text-center text-sm">
     Don't have an account?{' '}
-    <Link href="/register" className="text-purple-600 font-semibold">
+    <Link href="/register" className="text-emerald-600 font-semibold">
       Register
     </Link>
   </p>
@@ -157,7 +157,7 @@ export default function LoginPage() {
             >
               <p>
                 By logging in, you agree to our{' '}
-                <Link href="/terms" className="text-purple-600 hover:underline font-semibold">
+                <Link href="/terms" className="text-emerald-600 hover:underline font-semibold">
                   Terms of Service
                 </Link>
               </p>
@@ -166,9 +166,9 @@ export default function LoginPage() {
 
           {/* Additional Info */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="mt-8">
-            <div className="bg-purple-100 border-l-4 border-purple-600 p-4 rounded-lg">
-              <p className="text-sm text-purple-900 font-medium">Demo OTP</p>
-              <p className="text-xs text-purple-800 mt-1">Use any 6-digit code (e.g., 123456)</p>
+            <div className="bg-emerald-100 border-l-4 border-emerald-600 p-4 rounded-lg">
+              <p className="text-sm text-emerald-900 font-medium">Demo OTP</p>
+              <p className="text-xs text-emerald-800 mt-1">Use any 6-digit code (e.g., 123456)</p>
             </div>
           </motion.div>
         </motion.div>

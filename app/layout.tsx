@@ -4,19 +4,29 @@ import { Providers } from '@/components/Providers'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Mini Ecommerce - Premium Health Supplements',
-  description: 'Discover our premium selection of health supplements and wellness products',
-  generator: 'v0.app',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  title: {
+    default: 'Divaksha — Big Crunch. Zero Boring.',
+    template: '%s · Divaksha',
+  },
+  description: 'Iconic chips, global flavours and cult-favourite snacks delivered straight to your door.',
   openGraph: {
-    title: 'Mini Ecommerce - Premium Health Supplements',
-    description: 'Discover our premium selection of health supplements and wellness products',
+    title: 'Divaksha — Big Crunch. Zero Boring.',
+    description: 'Iconic chips, global flavours and cult-favourite snacks delivered straight to your door.',
     type: 'website',
+    images: [{ url: '/og.png', width: 1536, height: 1024, alt: 'Divaksha — Big Crunch. Zero Boring.' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Divaksha — Big Crunch. Zero Boring.',
+    description: 'Iconic chips, global flavours and cult-favourite snacks delivered straight to your door.',
+    images: ['/og.png'],
   },
 }
 
 export const viewport: Viewport = {
   colorScheme: 'light',
-  themeColor: '#059669',
+  themeColor: '#ff4d00',
 }
 
 export default function RootLayout({
@@ -26,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased bg-white text-gray-900">
+      <body className="antialiased bg-[#fff8eb] text-[#16130f]">
         <Providers>
           {children}
         </Providers>

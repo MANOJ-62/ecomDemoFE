@@ -77,7 +77,7 @@ export default function AdminSettingsPage() {
               type="text"
               value={settings.storeName}
               onChange={(e) => handleChange('storeName', e.target.value)}
-              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-emerald-600"
             />
           </div>
           <div>
@@ -86,7 +86,7 @@ export default function AdminSettingsPage() {
               type="email"
               value={settings.storeEmail}
               onChange={(e) => handleChange('storeEmail', e.target.value)}
-              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-emerald-600"
             />
           </div>
           <div>
@@ -95,7 +95,7 @@ export default function AdminSettingsPage() {
               type="tel"
               value={settings.storePhone}
               onChange={(e) => handleChange('storePhone', e.target.value)}
-              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-emerald-600"
             />
           </div>
         </div>
@@ -111,7 +111,7 @@ export default function AdminSettingsPage() {
               <select
                 value={settings.currency}
                 onChange={(e) => handleChange('currency', e.target.value)}
-                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-emerald-600"
               >
                 <option value="USD">USD ($)</option>
                 <option value="EUR">EUR (€)</option>
@@ -126,7 +126,7 @@ export default function AdminSettingsPage() {
                 step="0.1"
                 value={settings.taxRate}
                 onChange={(e) => handleChange('taxRate', parseFloat(e.target.value))}
-                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-emerald-600"
               />
             </div>
           </div>
@@ -137,7 +137,7 @@ export default function AdminSettingsPage() {
               step="0.01"
               value={settings.shippingCost}
               onChange={(e) => handleChange('shippingCost', parseFloat(e.target.value))}
-              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-emerald-600"
             />
           </div>
         </div>
@@ -152,7 +152,7 @@ export default function AdminSettingsPage() {
               type="checkbox"
               checked={settings.maintenanceMode}
               onChange={(e) => handleChange('maintenanceMode', e.target.checked)}
-              className="w-5 h-5 accent-purple-600 cursor-pointer"
+              className="w-5 h-5 accent-emerald-600 cursor-pointer"
             />
             <div>
               <p className="font-semibold text-gray-900">Enable Maintenance Mode</p>
@@ -168,7 +168,7 @@ export default function AdminSettingsPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
         onClick={handleSave}
-        className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all"
+        className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-amber-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all"
       >
         <Save size={20} />
         Save Settings

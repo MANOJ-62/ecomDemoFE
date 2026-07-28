@@ -1,28 +1,29 @@
 'use client'
 
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { ShoppingCart, Menu, X, Heart, Search, LogOut, User as UserIcon } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import { Heart, LogOut, Menu, Search, ShoppingBag, User as UserIcon, X } from 'lucide-react'
 import { useCart } from '@/hooks/useCart'
 import { getAuthToken, getCurrentUser, logout } from '@/services/auth'
 import { User } from '@/types'
+
+const navItems = [
+  { href: '/shop', label: 'Shop' },
+  { href: '/about', label: 'Our story' },
+  { href: '/contact', label: 'Contact' },
+]
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [user, setUser] = useState<User | null>(null)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const router = useRouter()
+  const pathname = usePathname()
   const { itemCount } = useCart()
 
   useEffect(() => {
-    const token = getAuthToken()
-    if (token) {
-      const currentUser = getCurrentUser()
-      if (currentUser) {
-        setUser(currentUser)
-      }
-    }
+    if (getAuthToken()) setUser(getCurrentUser())
   }, [])
 
   const handleLogout = () => {
@@ -33,137 +34,94 @@ export const Header = () => {
   }
 
   return (
-    <header className="sticky top-0 z-50 bg-gradient-to-r from-purple-50 to-orange-50 border-b-2 border-purple-200 shadow-md">
-      <div className="overflow-hidden bg-purple-700 text-white whitespace-nowrap py-1.5 text-xs font-semibold tracking-wide">
-        <div className="delivery-marquee inline-block">FREE DELIVERY on orders above ₹500 &nbsp;•&nbsp; Healthy snacking delivered to your doorstep &nbsp;•&nbsp; FREE DELIVERY on orders above ₹500</div>
+    <header className="sticky top-0 z-50 border-b-2 border-black bg-[#fff8eb]/95 text-[#16130f] backdrop-blur-xl">
+      <div className="overflow-hidden border-b-2 border-black bg-[#16130f] py-2 text-xs font-black uppercase tracking-[.16em] text-white whitespace-nowrap">
+        <div className="delivery-marquee inline-block">
+          Free delivery above ₹500 &nbsp; ★ &nbsp; Big crunch, zero boring &nbsp; ★ &nbsp; New drops every week &nbsp; ★ &nbsp;
+        </div>
       </div>
       <div className="container-custom">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="text-2xl font-bold gradient-text">
-            FoodZone
+        <div className="flex h-[72px] items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 text-xl font-black tracking-[-.055em]">
+            <span className="grid h-9 w-9 -rotate-3 place-items-center rounded-full bg-[#ff4d00] text-white shadow-[3px_3px_0_#16130f]">D</span>
+            DIVAKSHA
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            <Link href="/shop" className="text-gray-700 hover:text-purple-600 font-medium transition-colors">
-              Products
-            </Link>
-            <Link href="/about" className="text-gray-700 hover:text-purple-600 font-medium transition-colors">
-              About
-            </Link>
-            <Link href="/contact" className="text-gray-700 hover:text-purple-600 font-medium transition-colors">
-              Contact
-            </Link>
+          <nav className="hidden items-center gap-8 md:flex">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`relative py-2 text-sm font-bold transition-colors hover:text-[#ff4d00] ${pathname === item.href ? 'text-[#ff4d00]' : ''}`}
+              >
+                {item.label}
+                {pathname === item.href && <span className="absolute inset-x-0 -bottom-0.5 h-1 rounded-full bg-[#ffd92f]" />}
+              </Link>
+            ))}
           </nav>
 
-          {/* Right Actions */}
-          <div className="flex items-center gap-2 md:gap-4">
-            <button className="p-2 hover:bg-purple-100 rounded-lg transition-colors hidden sm:flex">
-              <Search size={20} className="text-purple-600" />
-            </button>
-            <Link href="/wishlist" className="p-2 hover:bg-pink-100 rounded-lg transition-colors relative">
-              <Heart size={20} className="text-pink-600" />
+          <div className="flex items-center gap-1 sm:gap-2">
+            <Link href="/shop" aria-label="Search products" className="hidden rounded-full p-2.5 transition hover:bg-[#ffd92f] sm:block">
+              <Search size={20} />
+            </Link>
+            <Link href="/wishlist" aria-label="Wishlist" className="rounded-full p-2.5 transition hover:bg-[#ef9cff]">
+              <Heart size={20} />
             </Link>
 
             {user ? (
-              <>
-                <div className="hidden sm:flex items-center gap-2 px-3 py-2 bg-purple-50 rounded-lg border border-purple-200">
-                  <UserIcon onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                      size={16} className="text-purple-600 cursor-pointer" />
-                  <span className="text-sm font-medium text-gray-700 cursor-pointer" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>{user.name}</span>
-                </div>
-                <div className="relative hidden sm:block">
-                  
-                  {isDropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-purple-200 z-50">
-                      <Link
-                        href="/profile"
-                        className="block px-4 py-2 text-gray-700 hover:bg-purple-50 font-medium text-sm border-b border-purple-100"
-                      >
-                        My Profile
-                      </Link>
-                      <Link
-                        href="/orders"
-                        className="block px-4 py-2 text-gray-700 hover:bg-purple-50 font-medium text-sm border-b border-purple-100"
-                      >
-                        My Orders
-                      </Link>
-                      <button
-                        onClick={handleLogout}
-                        className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 font-medium text-sm flex items-center gap-2"
-                      >
-                        <LogOut size={16} />
-                        Logout
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </>
+              <div className="relative hidden sm:block">
+                <button
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="flex items-center gap-2 rounded-full border-2 border-black bg-white px-3 py-2 text-sm font-bold shadow-[2px_2px_0_#16130f]"
+                >
+                  <UserIcon size={16} /> {user.name}
+                </button>
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-3 w-48 overflow-hidden rounded-2xl border-2 border-black bg-white shadow-[5px_5px_0_#16130f]">
+                    <Link href="/profile" className="block border-b border-black/10 px-4 py-3 text-sm font-bold hover:bg-[#ffd92f]">My profile</Link>
+                    <Link href="/orders" className="block border-b border-black/10 px-4 py-3 text-sm font-bold hover:bg-[#78d7ff]">My orders</Link>
+                    <button onClick={handleLogout} className="flex w-full items-center gap-2 px-4 py-3 text-sm font-bold text-red-600 hover:bg-red-50">
+                      <LogOut size={16} /> Logout
+                    </button>
+                  </div>
+                )}
+              </div>
             ) : (
-              <Link
-                href="/login"
-                className="hidden sm:block px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all"
-              >
+              <Link href="/login" className="hidden rounded-full bg-black px-5 py-2.5 text-sm font-bold text-white transition hover:-translate-y-0.5 sm:block">
                 Login
               </Link>
             )}
 
-            <Link href="/cart" className="p-2 hover:bg-orange-100 rounded-lg transition-colors relative">
-              <ShoppingCart size={20} className="text-orange-600" />
+            <Link href="/cart" aria-label={`Cart with ${itemCount} items`} className="relative rounded-full bg-[#ffd92f] p-2.5 transition hover:-rotate-6">
+              <ShoppingBag size={20} />
               {itemCount > 0 && (
-                <span className="absolute top-1 right-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full border border-black bg-[#ff4d00] px-1 text-[10px] font-black text-white">
                   {itemCount > 9 ? '9+' : itemCount}
                 </span>
               )}
             </Link>
-
-            {/* Mobile Menu Toggle */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 hover:bg-purple-100 rounded-lg transition-colors"
-            >
-              {isMenuOpen ? <X size={20} className="text-purple-600" /> : <Menu size={20} className="text-purple-600" />}
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu" className="rounded-full p-2.5 hover:bg-[#78d7ff] md:hidden">
+              {isMenuOpen ? <X size={21} /> : <Menu size={21} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="md:hidden pb-4 border-t-2 border-purple-200 bg-gradient-to-r from-purple-50 to-orange-50">
-            <Link href="/shop" className="block py-2 text-gray-700 hover:text-purple-600 font-medium">
-              Products
-            </Link>
+          <nav className="border-t-2 border-black py-4 md:hidden">
+            {navItems.map((item) => (
+              <Link key={item.href} href={item.href} onClick={() => setIsMenuOpen(false)} className="block rounded-xl px-4 py-3 font-bold hover:bg-[#ffd92f]">
+                {item.label}
+              </Link>
+            ))}
             {user ? (
               <>
-                <div className="px-4 py-3 bg-purple-100 border-b border-purple-200 font-medium text-purple-900">
-                  Hello, {user.name}
-                </div>
-                <Link href="/profile" className="block py-2 text-gray-700 hover:text-purple-600 font-medium">
-                  My Profile
-                </Link>
-                <Link href="/orders" className="block py-2 text-gray-700 hover:text-purple-600 font-medium">
-                  My Orders
-                </Link>
-                <button
-                  onClick={handleLogout}
-                  className="w-full text-left py-2 text-red-600 hover:text-red-700 font-medium flex items-center gap-2"
-                >
-                  <LogOut size={16} />
-                  Logout
-                </button>
+                <Link href="/profile" className="block rounded-xl px-4 py-3 font-bold hover:bg-[#78d7ff]">My profile</Link>
+                <Link href="/orders" className="block rounded-xl px-4 py-3 font-bold hover:bg-[#78d7ff]">My orders</Link>
+                <button onClick={handleLogout} className="flex w-full items-center gap-2 rounded-xl px-4 py-3 font-bold text-red-600 hover:bg-red-50"><LogOut size={16} /> Logout</button>
               </>
             ) : (
-              <Link href="/login" className="block py-2 px-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg my-2 text-center">
-                Login
-              </Link>
+              <Link href="/login" className="mt-2 block rounded-full bg-black px-4 py-3 text-center font-bold text-white">Login</Link>
             )}
-            <Link href="/about" className="block py-2 text-gray-700 hover:text-purple-600 font-medium">
-              About
-            </Link>
-            <Link href="/contact" className="block py-2 text-gray-700 hover:text-purple-600 font-medium">
-              Contact
-            </Link>
           </nav>
         )}
       </div>

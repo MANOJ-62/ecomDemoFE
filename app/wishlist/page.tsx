@@ -17,7 +17,7 @@ export default function WishlistPage() {
   const wishlistProducts = allProducts.filter(p => productIds.includes(p.id))
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-[#fff8eb] flex flex-col">
       <Header />
 
       <main className="flex-1">
@@ -31,7 +31,7 @@ export default function WishlistPage() {
               <ArrowLeft size={18} />
               Back to Shop
             </Link>
-            <h1 className="text-4xl font-bold text-gray-900 flex items-center gap-3">
+            <h1 className="electric-title text-5xl md:text-7xl text-gray-900 flex items-center gap-3">
               <Heart size={32} className="text-red-500 fill-red-500" />
               My Wishlist
             </h1>

@@ -28,7 +28,7 @@ export default function AdminDashboard() {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-12 h-12 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600 font-medium">Loading dashboard...</p>
         </div>
       </div>
@@ -63,15 +63,15 @@ export default function AdminDashboard() {
         {[
           {
             label: 'Total Revenue',
-            value: `$${stats.totalRevenue.toFixed(2)}`,
+            value: `$₹{stats.totalRevenue.toFixed(2)}`,
             icon: DollarSign,
-            color: 'from-purple-600 to-pink-600',
+            color: 'from-emerald-600 to-amber-600',
           },
           {
             label: 'Total Orders',
             value: stats.totalOrders.toString(),
             icon: ShoppingCart,
-            color: 'from-pink-600 to-orange-600',
+            color: 'from-Amber-600 to-orange-600',
           },
           {
             label: 'Total Customers',
@@ -83,11 +83,11 @@ export default function AdminDashboard() {
             label: 'Total Products',
             value: stats.totalProducts.toString(),
             icon: Package,
-            color: 'from-blue-600 to-purple-600',
+            color: 'from-blue-600 to-emerald-600',
           },
           {
             label: 'Avg Order Value',
-            value: `$${stats.averageOrderValue.toFixed(2)}`,
+            value: `$₹{stats.averageOrderValue.toFixed(2)}`,
             icon: TrendingUp,
             color: 'from-green-600 to-teal-600',
           },
@@ -128,7 +128,7 @@ export default function AdminDashboard() {
               <YAxis />
               <Tooltip
                 contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
-                formatter={(value) => `$${value}`}
+                formatter={(value) => `$₹{value}`}
               />
               <Legend />
               <Line
@@ -148,7 +148,7 @@ export default function AdminDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg shadow p-6 border border-purple-200"
+          className="bg-gradient-to-br from-emerald-50 to-amber-50 rounded-lg shadow p-6 border border-emerald-200"
         >
           <h2 className="text-xl font-bold text-gray-900 mb-6">Top Selling Product</h2>
           <div className="space-y-4">
@@ -158,7 +158,7 @@ export default function AdminDashboard() {
             </div>
             <div>
               <p className="text-sm text-gray-600 font-medium">Sales</p>
-              <p className="text-3xl font-bold text-purple-600 mt-1">{stats.topProduct.sales}</p>
+              <p className="text-3xl font-bold text-emerald-600 mt-1">{stats.topProduct.sales}</p>
             </div>
             <div>
               <p className="text-sm text-gray-600 font-medium">Revenue</p>
@@ -166,7 +166,7 @@ export default function AdminDashboard() {
             </div>
             <Link
               href="/admin/products"
-              className="mt-4 block w-full text-center px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-medium hover:from-purple-700 hover:to-pink-700 transition-all"
+              className="mt-4 block w-full text-center px-4 py-2 bg-gradient-to-r from-emerald-600 to-amber-600 text-white rounded-lg font-medium hover:from-emerald-700 hover:to-amber-700 transition-all"
             >
               View All Products
             </Link>
@@ -203,7 +203,7 @@ export default function AdminDashboard() {
       >
         <Link
           href="/admin/products/new"
-          className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow"
+          className="bg-gradient-to-r from-emerald-600 to-amber-600 text-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow"
         >
           <Package size={24} className="mb-2" />
           <h3 className="font-bold text-lg">Add New Product</h3>
@@ -219,7 +219,7 @@ export default function AdminDashboard() {
         </Link>
         <Link
           href="/admin/customers"
-          className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow"
+          className="bg-gradient-to-r from-blue-600 to-emerald-600 text-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow"
         >
           <Users size={24} className="mb-2" />
           <h3 className="font-bold text-lg">Customers</h3>

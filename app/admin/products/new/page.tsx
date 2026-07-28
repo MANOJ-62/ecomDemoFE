@@ -43,7 +43,7 @@ export default function NewProductPage() {
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
         <Link
           href="/admin/products"
-          className="flex items-center gap-2 text-purple-600 hover:text-purple-700 font-medium mb-4"
+          className="flex items-center gap-2 text-emerald-600 hover:text-emerald-700 font-medium mb-4"
         >
           <ArrowLeft size={20} />
           Back to Products
@@ -66,7 +66,7 @@ export default function NewProductPage() {
               required
               value={formData.name}
               onChange={(e) => handleChange('name', e.target.value)}
-              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-emerald-600"
               placeholder="Enter product name"
             />
           </div>
@@ -76,7 +76,7 @@ export default function NewProductPage() {
             <select
               value={formData.category}
               onChange={(e) => handleChange('category', e.target.value)}
-              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-emerald-600"
             >
               <option value="Snacks">Snacks</option>
               <option value="Beverages">Beverages</option>
@@ -92,7 +92,7 @@ export default function NewProductPage() {
               required
               value={formData.price}
               onChange={(e) => handleChange('price', parseFloat(e.target.value))}
-              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-emerald-600"
               placeholder="0.00"
             />
           </div>
@@ -104,7 +104,7 @@ export default function NewProductPage() {
               required
               value={formData.stock}
               onChange={(e) => handleChange('stock', parseInt(e.target.value))}
-              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-emerald-600"
               placeholder="0"
             />
           </div>
@@ -118,7 +118,7 @@ export default function NewProductPage() {
               max="5"
               value={formData.rating}
               onChange={(e) => handleChange('rating', parseFloat(e.target.value))}
-              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-emerald-600"
             />
           </div>
 
@@ -127,7 +127,7 @@ export default function NewProductPage() {
             <select
               value={formData.status}
               onChange={(e) => handleChange('status', e.target.value)}
-              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-emerald-600"
             >
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
@@ -141,7 +141,7 @@ export default function NewProductPage() {
               value={formData.description}
               onChange={(e) => handleChange('description', e.target.value)}
               rows={4}
-              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-emerald-600"
               placeholder="Enter product description"
             />
           </div>
@@ -152,7 +152,7 @@ export default function NewProductPage() {
               type="text"
               value={formData.flavors.join(', ')}
               onChange={(e) => handleChange('flavors', e.target.value.split(',').map((flavor) => flavor.trim()).filter(Boolean))}
-              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-emerald-600"
               placeholder="e.g. Chocolate, Vanilla, Strawberry"
             />
             <p className="mt-1 text-xs text-gray-500">Separate each flavor with a comma. Leave empty for products without flavor options.</p>
@@ -164,7 +164,7 @@ export default function NewProductPage() {
           <button
             type="submit"
             disabled={createProduct.isPending}
-            className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all disabled:opacity-50"
+            className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-amber-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all disabled:opacity-50"
           >
             <Save size={20} />
             {createProduct.isPending ? 'Creating...' : 'Create Product'}

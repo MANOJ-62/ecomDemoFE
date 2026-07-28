@@ -37,7 +37,7 @@ export default function AdminCustomersPage() {
         transition={{ delay: 0.1 }}
         className="grid grid-cols-1 md:grid-cols-3 gap-4"
       >
-        <div className="bg-gradient-to-br from-blue-600 to-purple-600 text-white p-6 rounded-lg shadow">
+        <div className="bg-gradient-to-br from-blue-600 to-emerald-600 text-white p-6 rounded-lg shadow">
           <p className="text-sm font-medium opacity-90">Total Customers</p>
           <p className="text-3xl font-bold mt-2">{total}</p>
         </div>
@@ -56,7 +56,7 @@ export default function AdminCustomersPage() {
         {isLoading ? (
           <div className="flex items-center justify-center h-96">
             <div className="text-center">
-              <div className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+              <div className="w-12 h-12 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
               <p className="text-gray-600">Loading customers...</p>
             </div>
           </div>
@@ -88,7 +88,7 @@ export default function AdminCustomersPage() {
                         {customer.email}
                       </div>
                     </td>
-                    <td className="px-6 py-4 font-semibold text-purple-600">{customer.totalOrders}</td>
+                    <td className="px-6 py-4 font-semibold text-emerald-600">{customer.totalOrders}</td>
                     <td className="px-6 py-4 font-semibold text-green-600">${customer.totalSpent.toFixed(2)}</td>
                     <td className="px-6 py-4">
                       <button
@@ -108,7 +108,7 @@ export default function AdminCustomersPage() {
                     <td className="px-6 py-4">
                       <Link
                         href={`/admin/customers/${customer.id}`}
-                        className="text-purple-600 hover:text-purple-700 font-medium flex items-center gap-1"
+                        className="text-emerald-600 hover:text-emerald-700 font-medium flex items-center gap-1"
                       >
                         <Eye size={18} />
                         View

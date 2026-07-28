@@ -14,7 +14,7 @@ import { getProductsPage } from '@/services/products'
 import Link from 'next/link'
 
 const featuredSlides = [
-  { title: 'Mini Thins', flavor: 'Cream N Onion', copy: 'A light, crunchy corn snack with a creamy onion twist.', image: '/products/hangrow/mini-thins-cream-n-onion.jpeg', href: '/product/1?flavor=Cream%20N%20Onion', tone: 'from-purple-950/80 to-purple-600/30' },
+  { title: 'Mini Thins', flavor: 'Cream N Onion', copy: 'A light, crunchy corn snack with a creamy onion twist.', image: '/products/hangrow/mini-thins-cream-n-onion.jpeg', href: '/product/1?flavor=Cream%20N%20Onion', tone: 'from-emerald-950/80 to-emerald-600/30' },
   { title: 'Hangrow Thins', flavor: 'Lime N Lemon', copy: 'Zesty citrus flavour with the satisfying crunch of puffed thins.', image: '/products/hangrow/thins-lime-n-lemon.jpeg', href: '/product/2?flavor=Lime%20N%20Lemon', tone: 'from-lime-950/80 to-lime-600/30' },
   { title: 'Hangrow Thins', flavor: 'Cheese Magic', copy: 'A bold cheesy crunch for every snack break.', image: '/products/hangrow/thins-cheese-magic.jpeg', href: '/product/2?flavor=Cheese%20Magic', tone: 'from-orange-950/80 to-orange-600/30' },
 ]
@@ -119,17 +119,17 @@ export default function ShopPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 flex flex-col">
+    <div className="min-h-screen bg-[#fff8eb] text-[#16130f] flex flex-col">
       <Header />
 
       <main className="flex-1">
         <section className="container-custom pt-8">
-          <div className="relative min-h-[300px] overflow-hidden rounded-3xl shadow-xl bg-gray-900">
+          <div className="relative min-h-[340px] overflow-hidden rounded-[2rem] border-2 border-black shadow-[8px_8px_0_#16130f] bg-gray-900">
             {featuredSlides.map((slide, index) => (
               <div key={slide.flavor} className={`absolute inset-0 transition-opacity duration-700 ${activeSlide === index ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                 <img src={slide.image} alt={`${slide.title} ${slide.flavor}`} className="absolute inset-0 w-full h-full object-cover object-center" />
                 <div className={`absolute inset-0 bg-gradient-to-r ${slide.tone}`} />
-                <div className="relative h-full min-h-[300px] flex items-center px-8 sm:px-14 text-white max-w-xl"><div><p className="text-sm uppercase tracking-[0.25em] font-bold text-yellow-300 mb-3">Best seller</p><h2 className="text-4xl sm:text-5xl font-black mb-2">{slide.title}</h2><p className="text-xl font-semibold mb-4">{slide.flavor}</p><p className="text-white/90 mb-7">{slide.copy}</p><Link href={slide.href} className="inline-block rounded-lg bg-white px-5 py-3 font-bold text-purple-800 hover:bg-yellow-100">Shop now</Link></div></div>
+                <div className="relative h-full min-h-[340px] flex items-center px-8 sm:px-14 text-white max-w-xl"><div><p className="mb-3 inline-flex rounded-full bg-[#ffd92f] px-3 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-black">Best seller</p><h2 className="electric-title text-5xl sm:text-6xl mb-2">{slide.title}</h2><p className="text-xl font-black mb-4 text-[#ffd92f]">{slide.flavor}</p><p className="text-white/90 font-medium mb-7">{slide.copy}</p><Link href={slide.href} className="inline-block rounded-full border-2 border-black bg-white px-6 py-3 font-black text-black shadow-[4px_4px_0_#ffd92f]">Shop now</Link></div></div>
               </div>
             ))}
             <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">{featuredSlides.map((slide, index) => <button key={slide.flavor} aria-label={`Show ${slide.flavor}`} onClick={() => setActiveSlide(index)} className={`h-2.5 rounded-full transition-all ${activeSlide === index ? 'w-7 bg-white' : 'w-2.5 bg-white/60'}`} />)}</div>
@@ -141,8 +141,9 @@ export default function ShopPage() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-              Shop All Snacks
+            <span className="electric-kicker mb-5">Pick your crunch</span>
+            <h1 className="electric-title text-5xl sm:text-7xl text-gray-900 mb-4">
+              Shop all snacks
             </h1>
             <p className="text-lg text-gray-700 font-medium">
               Browse our delicious collection of snacks and treats from your favorite brands
@@ -158,7 +159,7 @@ export default function ShopPage() {
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="space-y-4"
+                className="electric-card space-y-4 p-5"
               >
                 <h3 className="text-lg font-bold text-gray-900">Categories</h3>
                 <div className="space-y-2">
@@ -168,8 +169,8 @@ export default function ShopPage() {
                       onClick={() => setSelectedCategory(category)}
                       className={`w-full text-left px-4 py-2 rounded-lg transition-all duration-200 font-medium ${
                         selectedCategory === category
-                          ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
-                          : 'bg-white text-gray-700 hover:bg-purple-50 border border-purple-200'
+                          ? 'border-2 border-black bg-[#ffd92f] text-black shadow-[3px_3px_0_#16130f]'
+                          : 'border-2 border-transparent bg-[#fff8eb] text-gray-700 hover:border-black hover:bg-[#78d7ff]'
                       }`}
                     >
                       {category}
@@ -183,7 +184,7 @@ export default function ShopPage() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1 }}
-                className="mt-8 pt-8 border-t-2 border-purple-200"
+                className="mt-8 rounded-2xl border-2 border-black/15 bg-white p-5"
               >
                 <h3 className="text-lg font-bold text-gray-900 mb-4">Price Range</h3>
                 <div className="space-y-3 text-sm">
@@ -197,9 +198,9 @@ export default function ShopPage() {
                         type="checkbox"
                         checked={priceRange.includes(value)}
                         onChange={() => togglePriceRange(value)}
-                        className="w-4 h-4 rounded accent-purple-600 cursor-pointer"
+                        className="w-4 h-4 rounded accent-emerald-600 cursor-pointer"
                       />
-                      <span className="text-gray-700 group-hover:text-purple-600 transition-colors">
+                      <span className="text-gray-700 group-hover:text-emerald-600 transition-colors">
                         {label}
                       </span>
                     </label>
@@ -212,7 +213,7 @@ export default function ShopPage() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
-                className="mt-8 pt-8 border-t-2 border-purple-200"
+                className="mt-5 rounded-2xl border-2 border-black/15 bg-white p-5"
               >
                 <h3 className="text-lg font-bold text-gray-900 mb-4">Rating</h3>
                 <div className="space-y-3 text-sm">
@@ -226,9 +227,9 @@ export default function ShopPage() {
                         name="rating"
                         checked={minRating === stars}
                         onChange={() => toggleRating(stars)}
-                        className="w-4 h-4 accent-purple-600 cursor-pointer"
+                        className="w-4 h-4 accent-emerald-600 cursor-pointer"
                       />
-                      <span className="text-gray-700 group-hover:text-purple-600 transition-colors">
+                      <span className="text-gray-700 group-hover:text-emerald-600 transition-colors">
                         {stars}+ Stars
                       </span>
                     </label>
@@ -267,7 +268,7 @@ export default function ShopPage() {
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className="px-4 py-2 border-2 border-purple-300 rounded-lg focus:outline-none focus:border-purple-600 focus:ring-2 focus:ring-purple-300 font-medium bg-white text-gray-900 cursor-pointer"
+                    className="px-4 py-3 border-2 border-black rounded-full focus:outline-none focus:ring-4 focus:ring-[#ffd92f] font-bold bg-white text-gray-900 cursor-pointer"
                   >
                     <option value="newest">Newest</option>
                     <option value="price-low">Price: Low to High</option>

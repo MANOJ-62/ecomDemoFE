@@ -32,20 +32,20 @@ export const AdminSidebar = () => {
       {/* Mobile Toggle */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-purple-600 text-white rounded-lg"
+        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-[#ff4d00] text-white rounded-full border-2 border-black shadow-[3px_3px_0_#16130f]"
       >
         {isOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
 
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 h-screen w-64 bg-gradient-to-b from-purple-900 to-purple-800 text-white shadow-lg transition-transform duration-300 z-40 ${
+        className={`fixed left-0 top-0 h-screen w-64 bg-[#16130f] text-white shadow-lg transition-transform duration-300 z-40 ${
           isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}
       >
-        <div className="p-6 border-b border-purple-700">
-          <Link href="/admin" className="text-2xl font-bold gradient-text">
-            Admin Panel
+        <div className="p-6 border-b border-white/15">
+          <Link href="/admin" className="flex items-center gap-2 text-xl font-black tracking-[-.04em]">
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-[#ffd92f] text-black">D</span> ADMIN
           </Link>
         </div>
 
@@ -60,8 +60,8 @@ export const AdminSidebar = () => {
                 onClick={() => setIsOpen(false)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
                   active
-                    ? 'bg-gradient-to-r from-pink-600 to-orange-600 text-white shadow-lg'
-                    : 'text-purple-200 hover:bg-purple-700 hover:text-white'
+                    ? 'bg-[#ff4d00] text-white shadow-[4px_4px_0_#ffd92f]'
+                    : 'text-white/55 hover:bg-white/10 hover:text-white'
                 }`}
               >
                 <Icon size={20} />
@@ -71,10 +71,10 @@ export const AdminSidebar = () => {
           })}
         </nav>
 
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-purple-700">
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/15">
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-purple-200 hover:bg-red-600 hover:text-white transition-all duration-200 font-medium"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-white/55 hover:bg-red-600 hover:text-white transition-all duration-200 font-bold"
           >
             <LogOut size={20} />
             <span>Logout</span>
