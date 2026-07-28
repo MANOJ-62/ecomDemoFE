@@ -7,6 +7,10 @@ import { Footer } from '@/components/Footer'
 import { ProductGrid } from '@/components/ProductGrid'
 import { useProducts } from '@/hooks/useProducts'
 import { getShopCategories } from '@/services/categories'
+import { ApiResponse } from '@/services/types/backend'
+import { Product } from '@/types'
+import api, { unwrapApiResponse } from '@/services/apiClient'
+import { getProductsPage } from '@/services/products'
 
 export default function ShopPage() {
   const [selectedCategory, setSelectedCategory] = useState('All Products')
@@ -21,33 +25,75 @@ export default function ShopPage() {
       .catch(() => setCategories(['All Products']))
   }, [])
 
-  const { data: products = [], isLoading } = useProducts(selectedCategory)
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(false)
 
-  // Filter products
-  const filteredProducts = products
-    .filter(p => {
-      if (priceRange.length > 0) {
-        const price = p.price
-        return priceRange.some(range => {
-          if (range === 0) return price <= 25
-          if (range === 1) return price > 25 && price <= 50
-          if (range === 2) return price > 50
-          return true
-        })
+  useEffect(() => {
+    loadProducts()
+  }, [selectedCategory])
+
+  const loadProducts = async () => {
+    try {
+      setLoading(true)
+  
+      let categoryId: number | undefined
+  
+      if (selectedCategory !== 'All Products') {
+        const response = await api.get<
+          ApiResponse<Array<{ id: number; name: string }>>
+        >('/categories')
+  
+        const categories = unwrapApiResponse(response)
+  
+        categoryId = categories.find(
+          c => c.name === selectedCategory
+        )?.id
       }
-      return true
-    })
-    .filter(p => {
-      if (minRating !== null) return p.rating >= minRating
-      return true
-    })
-    .sort((a, b) => {
-      if (sortBy === 'newest') return 0
-      if (sortBy === 'price-low') return a.price - b.price
-      if (sortBy === 'price-high') return b.price - a.price
-      if (sortBy === 'rating') return b.rating - a.rating
-      return 0
-    })
+  
+      const result = await getProductsPage({
+        page: 0,
+        size: 100,
+        categoryId,
+      })
+  
+      setProducts(result.data)
+    } finally {
+      setLoading(false)
+    }
+  }
+  
+  // // Filter products
+  // const filteredProducts = products
+  //   .filter(p => {
+  //     if (priceRange.length > 0) {
+  //       const price = p.price
+  //       return priceRange.some(range => {
+  //         if (range === 0) return price <= 25
+  //         if (range === 1) return price > 25 && price <= 50
+  //         if (range === 2) return price > 50
+  //         return true
+  //       })
+  //     }
+  //     return true
+  //   })
+  //   .filter(p => {
+  //     if (minRating !== null) return p.rating >= minRating
+  //     return true
+  //   })
+  //   .sort((a, b) => {
+  //     if (sortBy === 'newest') return 0
+  //     if (sortBy === 'price-low') return a.price - b.price
+  //     if (sortBy === 'price-high') return b.price - a.price
+  //     if (sortBy === 'rating') return b.rating - a.rating
+  //     return 0
+  //   })
+  const displayedProducts = [...products].sort((a, b) => {
+    if (sortBy === 'newest') return 0
+    if (sortBy === 'price-low') return a.price - b.price
+    if (sortBy === 'price-high') return b.price - a.price
+    if (sortBy === 'rating') return b.rating - a.rating
+    return 0
+  })
 
   const togglePriceRange = (range: number) => {
     setPriceRange(prev =>
@@ -191,7 +237,7 @@ export default function ShopPage() {
               >
                 <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <p className="text-gray-700 font-medium">
-                    Showing {filteredProducts.length} of {products.length} products
+                    Showing {displayedProducts.length} of {products.length} products
                   </p>
                   <select
                     value={sortBy}
@@ -204,7 +250,7 @@ export default function ShopPage() {
                     <option value="rating">Highest Rated</option>
                   </select>
                 </div>
-                <ProductGrid products={filteredProducts} isLoading={isLoading} />
+                <ProductGrid products={displayedProducts} isLoading={loading} />
               </motion.div>
             </div>
           </div>

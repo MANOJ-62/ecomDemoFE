@@ -2,7 +2,6 @@ import api, { unwrapApiResponse } from './apiClient'
 import { ApiResponse, OrderResponse } from './types/backend'
 import { mapOrderResponseToOrder } from './mappers'
 import { CartItem, Customer, Order } from '@/types'
-import { syncCartItems } from './cart'
 import { createAddressFromCustomer } from './addresses'
 
 export async function placeOrder(payload: {
@@ -41,13 +40,6 @@ export async function createOrder(
   _tax: number,
   _shipping: number
 ): Promise<Order> {
-  await syncCartItems(
-    items.map((item) => ({
-      productId: item.productId,
-      quantity: item.quantity,
-    }))
-  )
-
   const address = await createAddressFromCustomer(customer)
   const orderResponse = await placeOrder({
     addressId: Number(address.id),

@@ -13,12 +13,18 @@ export interface Product {
   ingredients: string[]
   servings?: number
   weight?: string
+  flavors?: string[]
+  nutritionInfo?: string
+  allergenInfo?: string
+  storageInstructions?: string
 }
 
 export interface CartItem {
+  cartItemId?: number
   productId: number
   product: Product
   quantity: number
+  flavor?: string
 }
 
 export interface Cart {

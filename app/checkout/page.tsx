@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { Header } from '@/components/Header'
@@ -8,13 +8,39 @@ import { Footer } from '@/components/Footer'
 import { CheckoutForm, CheckoutFormData } from '@/components/CheckoutForm'
 import { useCart } from '@/hooks/useCart'
 import { createOrder } from '@/services/api'
-import { ShoppingCart } from 'lucide-react'
+import { Loader, ShoppingCart } from 'lucide-react'
+import { isAuthenticated } from '@/services/auth'
 
 export default function CheckoutPage() {
   const router = useRouter()
-  const { items, subtotal, tax, shipping, total, clearCart } = useCart()
+  const { items, subtotal, tax, shipping, total, clearCart, addItem } = useCart()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [restoringPendingCart, setRestoringPendingCart] = useState(true)
+
+  useEffect(() => {
+    if (!isAuthenticated()) router.replace('/login?next=%2Fcheckout')
+  }, [router])
+
+  useEffect(() => {
+    const pending = sessionStorage.getItem('pending-cart-item')
+    if (!pending || !isAuthenticated()) {
+      setRestoringPendingCart(false)
+      return
+    }
+    try {
+      const { product, quantity, flavor } = JSON.parse(pending)
+      sessionStorage.removeItem('pending-cart-item')
+      addItem(product, quantity, flavor).catch(() => setError('Unable to add the selected item to your cart.')).finally(() => setRestoringPendingCart(false))
+    } catch {
+      sessionStorage.removeItem('pending-cart-item')
+      setRestoringPendingCart(false)
+    }
+  }, [addItem])
+
+  if (restoringPendingCart) {
+    return <div className="min-h-screen flex items-center justify-center"><Loader className="animate-spin text-emerald-600" /></div>
+  }
 
   if (items.length === 0) {
     return (
@@ -42,7 +68,7 @@ export default function CheckoutPage() {
       await createOrder(items, data, subtotal, tax, shipping)
 
       // Clear cart
-      clearCart()
+      await clearCart()
 
       // Redirect to order success page
       router.push('/order-success')

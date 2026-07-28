@@ -24,8 +24,13 @@ export function mapProductResponseToProduct(dto: ProductResponse): Product {
     image: dto.thumbnailUrl ?? dto.images?.[0] ?? '',
     category: dto.categoryName ?? '',
     stock: dto.stock,
-    benefits: [],
-    ingredients: [],
+    benefits: dto.highlights ?? [],
+    ingredients: dto.ingredients ?? [],
+    weight: dto.netWeight,
+    flavors: dto.flavors ?? [],
+    nutritionInfo: dto.nutritionInfo,
+    allergenInfo: dto.allergenInfo,
+    storageInstructions: dto.storageInstructions,
   }
 }
 
@@ -40,6 +45,7 @@ export function mapProductResponseToAdminProduct(dto: ProductResponse): AdminPro
     reviews: 0,
     image: dto.thumbnailUrl ?? dto.images?.[0] ?? '',
     description: dto.shortDescription ?? dto.description ?? '',
+    flavors: dto.flavors ?? [],
     status: dto.active ? 'active' : 'inactive',
     createdAt: dto.createdAt ?? new Date().toISOString(),
     updatedAt: dto.updatedAt ?? new Date().toISOString(),
@@ -58,6 +64,7 @@ export function mapAdminProductToCreateRequest(product: Omit<AdminProduct, 'id' 
     thumbnailUrl: product.image,
     active: product.status === 'active',
     featured: false,
+    flavors: product.flavors,
     images: product.image ? [product.image] : [],
   }
 }
@@ -77,6 +84,7 @@ export function mapAdminProductToUpdateRequest(product: Partial<AdminProduct>, c
       images: product.image ? [product.image] : [],
     }),
     ...(product.status !== undefined && { active: product.status === 'active' }),
+    ...(product.flavors !== undefined && { flavors: product.flavors }),
   }
 }
 
@@ -129,6 +137,7 @@ function mapOrderItemToCartItem(item: OrderResponse['items'][number]): CartItem 
       featured: false,
     }),
     quantity: item.quantity,
+    flavor: item.flavor,
   }
 }
 

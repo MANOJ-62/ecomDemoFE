@@ -30,12 +30,19 @@ export interface ProductResponse {
   description?: string
   sku: string
   brand?: string
+  netWeight?: string
+  nutritionInfo?: string
+  allergenInfo?: string
+  storageInstructions?: string
   price: number
   discountPrice?: number
   stock: number
   thumbnailUrl?: string
   active: boolean
   featured: boolean
+  flavors?: string[]
+  highlights?: string[]
+  ingredients?: string[]
   images?: string[]
   createdAt?: string
   updatedAt?: string
@@ -68,6 +75,7 @@ export interface CartItemResponse {
   productId: number
   productName: string
   thumbnailUrl?: string
+  flavor?: string
   quantity: number
   price: number
   subtotal: number
@@ -100,6 +108,7 @@ export interface OrderItemResponse {
   productId: number
   productName: string
   sku: string
+  flavor?: string
   price: number
   quantity: number
   subtotal: number

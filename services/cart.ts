@@ -6,10 +6,11 @@ export async function getCart(): Promise<CartResponse> {
   return unwrapApiResponse(response)
 }
 
-export async function addToCart(productId: number, quantity: number): Promise<CartResponse> {
+export async function addToCart(productId: number, quantity: number, flavor?: string): Promise<CartResponse> {
   const response = await api.post<ApiResponse<CartResponse>>('/cart/items', {
     productId,
     quantity,
+    flavor,
   })
   return unwrapApiResponse(response)
 }
@@ -31,10 +32,10 @@ export async function clearCart(): Promise<void> {
   unwrapApiResponse(response)
 }
 
-export async function syncCartItems(items: Array<{ productId: number; quantity: number }>): Promise<void> {
+export async function syncCartItems(items: Array<{ productId: number; quantity: number; flavor?: string }>): Promise<void> {
   await clearCart()
 
   for (const item of items) {
-    await addToCart(item.productId, item.quantity)
+    await addToCart(item.productId, item.quantity, item.flavor)
   }
 }

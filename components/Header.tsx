@@ -66,16 +66,12 @@ export const Header = () => {
             {user ? (
               <>
                 <div className="hidden sm:flex items-center gap-2 px-3 py-2 bg-purple-50 rounded-lg border border-purple-200">
-                  <UserIcon size={16} className="text-purple-600" />
-                  <span className="text-sm font-medium text-gray-700">{user.name}</span>
+                  <UserIcon onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                      size={16} className="text-purple-600 cursor-pointer" />
+                  <span className="text-sm font-medium text-gray-700 cursor-pointer" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>{user.name}</span>
                 </div>
                 <div className="relative hidden sm:block">
-                  <button
-                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    className="p-2 hover:bg-purple-100 rounded-lg transition-colors"
-                  >
-                    <LogOut size={20} className="text-purple-600" />
-                  </button>
+                  
                   {isDropdownOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-purple-200 z-50">
                       <Link

@@ -1,171 +1,48 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
-import { Package, Calendar, DollarSign, TrendingUp } from 'lucide-react'
+import { getMyOrders } from '@/services/orders'
+import { isAuthenticated } from '@/services/auth'
+import { Order } from '@/types'
+import { Loader, Package } from 'lucide-react'
 
 export default function OrdersPage() {
-  const orders = [
-    {
-      id: 'ORD-001',
-      date: 'June 1, 2024',
-      items: 2,
-      total: '$84.88',
-      status: 'Delivered',
-      estimatedDelivery: 'Delivered on June 5, 2024',
-    },
-    {
-      id: 'ORD-002',
-      date: 'May 25, 2024',
-      items: 1,
-      total: '$56.99',
-      status: 'Delivered',
-      estimatedDelivery: 'Delivered on May 29, 2024',
-    },
-    {
-      id: 'ORD-003',
-      date: 'May 15, 2024',
-      items: 3,
-      total: '$124.50',
-      status: 'Delivered',
-      estimatedDelivery: 'Delivered on May 19, 2024',
-    },
-    {
-      id: 'ORD-004',
-      date: 'May 5, 2024',
-      items: 1,
-      total: '$42.99',
-      status: 'Delivered',
-      estimatedDelivery: 'Delivered on May 9, 2024',
-    },
-  ]
+  const router = useRouter()
+  const [orders, setOrders] = useState<Order[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
 
-  return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <Header />
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      router.replace('/login?next=%2Forders')
+      return
+    }
+    getMyOrders().then(setOrders).catch(() => setError('Unable to load your orders.')).finally(() => setLoading(false))
+  }, [router])
 
-      <main className="flex-1">
-        <div className="container-custom py-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">Order History</h1>
-            <p className="text-lg text-gray-600 mb-12">
-              Track and manage all your orders in one place
-            </p>
-
-            {/* Stats */}
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-12">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg p-6 border border-emerald-200"
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-gray-600">Total Orders</p>
-                    <p className="text-2xl font-bold text-gray-900 mt-1">{orders.length}</p>
-                  </div>
-                  <Package className="w-10 h-10 text-emerald-600 opacity-20" />
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg p-6 border border-emerald-200"
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-gray-600">Total Spent</p>
-                    <p className="text-2xl font-bold text-gray-900 mt-1">$309.36</p>
-                  </div>
-                  <DollarSign className="w-10 h-10 text-emerald-600 opacity-20" />
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg p-6 border border-emerald-200"
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-gray-600">Delivered</p>
-                    <p className="text-2xl font-bold text-gray-900 mt-1">4/4</p>
-                  </div>
-                  <TrendingUp className="w-10 h-10 text-emerald-600 opacity-20" />
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg p-6 border border-emerald-200"
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-gray-600">Average Order</p>
-                    <p className="text-2xl font-bold text-gray-900 mt-1">$77.34</p>
-                  </div>
-                  <Calendar className="w-10 h-10 text-emerald-600 opacity-20" />
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Orders List */}
-            <div className="space-y-4">
-              {orders.map((order, index) => (
-                <motion.div
-                  key={order.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow"
-                >
-                  <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
-                    <div>
-                      <p className="text-sm text-gray-600">Order ID</p>
-                      <p className="font-bold text-gray-900 text-lg">{order.id}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-600">Date</p>
-                      <p className="text-gray-900">{order.date}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-600">Items</p>
-                      <p className="text-gray-900">{order.items} item{order.items > 1 ? 's' : ''}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-600">Total</p>
-                      <p className="font-bold text-gray-900 text-lg">{order.total}</p>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="px-4 py-2 bg-emerald-100 text-emerald-700 rounded-full text-sm font-semibold">
-                        {order.status}
-                      </span>
-                      <button className="text-emerald-600 hover:text-emerald-700 font-semibold">
-                        View Details
-                      </button>
-                    </div>
-                  </div>
-                  <div className="mt-4 pt-4 border-t border-gray-200">
-                    <p className="text-sm text-gray-600">{order.estimatedDelivery}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </main>
-
-      <Footer />
-    </div>
-  )
+  return <div className="min-h-screen bg-white flex flex-col">
+    <Header />
+    <main className="flex-1 container-custom py-12">
+      <h1 className="text-4xl font-bold text-gray-900 mb-2">Order History</h1>
+      <p className="text-gray-600 mb-8">Your orders are loaded from your account.</p>
+      {loading && <Loader className="animate-spin text-emerald-600" />}
+      {error && <p className="text-red-600">{error}</p>}
+      {!loading && !error && orders.length === 0 && <div className="py-16 text-center text-gray-600"><Package className="mx-auto mb-3 text-gray-300" size={48} />You have not placed any orders yet.</div>}
+      <div className="space-y-4">
+        {orders.map((order) => <article key={order.id} className="border border-gray-200 rounded-lg p-6">
+          <div className="flex flex-wrap justify-between gap-4 border-b border-gray-100 pb-4">
+            <div><p className="text-sm text-gray-500">Order</p><p className="font-bold text-gray-900">{order.id}</p></div>
+            <div><p className="text-sm text-gray-500">Placed</p><p>{new Date(order.createdAt).toLocaleDateString()}</p></div>
+            <div><p className="text-sm text-gray-500">Total</p><p className="font-bold">₹{order.total.toFixed(2)}</p></div>
+            <span className="self-center px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-sm font-semibold capitalize">{order.status}</span>
+          </div>
+          <ul className="mt-4 space-y-2">{order.items.map((item, index) => <li key={`${item.productId}-${index}`} className="flex justify-between text-sm"><span>{item.product.name}{item.flavor ? ` — ${item.flavor}` : ''} × {item.quantity}</span><span>₹{(item.product.price * item.quantity).toFixed(2)}</span></li>)}</ul>
+        </article>)}
+      </div>
+    </main>
+    <Footer />
+  </div>
 }

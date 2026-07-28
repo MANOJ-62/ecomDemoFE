@@ -19,6 +19,7 @@ export default function NewProductPage() {
     reviews: 0,
     image: '/products/default.png',
     description: '',
+    flavors: [] as string[],
     status: 'active',
   })
 
@@ -143,6 +144,18 @@ export default function NewProductPage() {
               className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
               placeholder="Enter product description"
             />
+          </div>
+
+          <div className="col-span-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">Flavors</label>
+            <input
+              type="text"
+              value={formData.flavors.join(', ')}
+              onChange={(e) => handleChange('flavors', e.target.value.split(',').map((flavor) => flavor.trim()).filter(Boolean))}
+              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
+              placeholder="e.g. Chocolate, Vanilla, Strawberry"
+            />
+            <p className="mt-1 text-xs text-gray-500">Separate each flavor with a comma. Leave empty for products without flavor options.</p>
           </div>
         </div>
 

@@ -57,6 +57,7 @@ export const getAdminProducts = async (
       reviews: product.reviews,
       image: product.image,
       description: product.description,
+      flavors: product.flavors ?? [],
       status: 'active',
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),

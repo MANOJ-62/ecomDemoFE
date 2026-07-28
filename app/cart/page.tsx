@@ -56,7 +56,7 @@ export default function CartPage() {
               >
                 {items.map((item) => (
                   <motion.div
-                    key={item.productId}
+                    key={item.cartItemId}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 20 }}
@@ -77,11 +77,12 @@ export default function CartPage() {
                       <p className="text-sm text-gray-600 mb-2">
                         ${item.product.price.toFixed(2)} each
                       </p>
+                      {item.flavor && <p className="text-sm text-gray-500 mb-2">Flavor: {item.flavor}</p>}
 
                       {/* Quantity Control */}
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => updateQuantity(item.productId, item.quantity - 1)}
+                          onClick={() => item.cartItemId && updateQuantity(item.cartItemId, item.quantity - 1)}
                           className="px-3 py-1 bg-white border border-gray-300 rounded hover:bg-gray-100 font-semibold"
                         >
                           -
@@ -90,7 +91,7 @@ export default function CartPage() {
                           {item.quantity}
                         </span>
                         <button
-                          onClick={() => updateQuantity(item.productId, item.quantity + 1)}
+                          onClick={() => item.cartItemId && updateQuantity(item.cartItemId, item.quantity + 1)}
                           className="px-3 py-1 bg-white border border-gray-300 rounded hover:bg-gray-100 font-semibold"
                         >
                           +
@@ -104,7 +105,7 @@ export default function CartPage() {
                         ${(item.product.price * item.quantity).toFixed(2)}
                       </p>
                       <button
-                        onClick={() => removeItem(item.productId)}
+                        onClick={() => item.cartItemId && removeItem(item.cartItemId)}
                         className="text-gray-400 hover:text-red-600 transition-colors"
                       >
                         <Trash2 size={18} />

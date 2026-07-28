@@ -1,22 +1,50 @@
 'use client'
 
 import { useState, use } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
-import { useProduct } from '@/hooks/useProducts'
 import { useCart } from '@/hooks/useCart'
 import { useWishlist } from '@/hooks/useWishlist'
 import { Star, Heart, ShoppingCart, Check, Loader } from 'lucide-react'
+import { Product } from '@/types'
+import { useEffect } from 'react'
+import { getProductById } from '@/services/products'
+import { isAuthenticated } from '@/services/auth'
 
-export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+export default function ProductPage({ params }: { params: Promise<{ id: number }> }) {
   const { id } = use(params)
-  const { data: product, isLoading } = useProduct(id)
+  const [product, setProduct] = useState<Product | null>(null)
+  const [isLoading, setLoading] = useState(true)
   const { addItem } = useCart()
+  const router = useRouter()
   const { isInWishlist, toggleWishlist } = useWishlist()
   const [quantity, setQuantity] = useState(1)
   const [isAddedToCart, setIsAddedToCart] = useState(false)
+  const [selectedFlavor, setSelectedFlavor] = useState('')
 
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        setLoading(true)
+  
+        const data = await getProductById(id)
+  
+        setProduct(data);
+        setSelectedFlavor(data?.flavors?.[0] || "");
+      } catch (error) {
+        console.error(error)
+        setProduct(null)
+      } finally {
+        setLoading(false)
+      }
+    }
+  
+    fetchProduct()
+  }, [id])
+  
+  
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -24,7 +52,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
       </div>
     )
   }
-
+  
   if (!product) {
     return (
       <div className="min-h-screen bg-white flex flex-col">
@@ -42,7 +70,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a href="/products" className="btn-primary">
+              <a href="/shop" className="btn-primary">
                 Browse All Products
               </a>
               <a href="/" className="btn-secondary">
@@ -59,10 +87,20 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     )
   }
 
-  const handleAddToCart = () => {
-    addItem(product, quantity)
-    setIsAddedToCart(true)
-    setTimeout(() => setIsAddedToCart(false), 3000)
+  const handleAddToCart = async () => {
+    if (product.flavors?.length && !selectedFlavor) return
+    if (!isAuthenticated()) {
+      sessionStorage.setItem('pending-cart-item', JSON.stringify({ product, quantity, flavor: selectedFlavor || undefined }))
+      router.push('/login?next=%2Fcheckout')
+      return
+    }
+    try {
+      await addItem(product, quantity, selectedFlavor || undefined)
+      setIsAddedToCart(true)
+      setTimeout(() => setIsAddedToCart(false), 3000)
+    } catch (error) {
+      console.error('Unable to add item to cart', error)
+    }
   }
 
   return (
@@ -73,17 +111,72 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
         <div className="container-custom py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Product Image */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="flex items-center justify-center"
-            >
-              <div className="w-full aspect-square bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg flex items-center justify-center p-8">
-                <span className="text-center text-gray-400 text-lg max-w-xs">
-                  {product.name}
-                </span>
-              </div>
-            </motion.div>
+            <div className="space-y-6">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="flex items-center justify-center"
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-full object-contain rounded-xl"
+                />
+              </motion.div>
+
+              {/* Benefits */}
+              {product.benefits.length > 0 && <div>
+                <h3 className="font-semibold text-gray-900 mb-3">Key Benefits:</h3>
+                <div className="flex flex-wrap gap-2">
+                  {product.benefits.map((benefit, i) => (
+                    <span
+                      key={i}
+                      className="flex items-center gap-2 bg-emerald-50 text-emerald-700 px-3 py-2 rounded-lg text-sm"
+                    >
+                      <Check size={16} />
+                      {benefit}
+                    </span>
+                  ))}
+                </div>
+              </div>}
+
+              {/* Ingredients */}
+              {product.ingredients.length > 0 && <div>
+                <h3 className="font-semibold text-gray-900 mb-3">Ingredients:</h3>
+                <ul className="space-y-1">
+                  {product.ingredients.map((ingredient, i) => (
+                    <li key={i} className="text-gray-700 flex items-center gap-2">
+                      <span className="w-2 h-2 bg-emerald-600 rounded-full" />
+                      {ingredient}
+                    </li>
+                  ))}
+                </ul>
+              </div>}
+
+              {/* Product Info */}
+              {(product.weight || product.nutritionInfo || product.storageInstructions || product.allergenInfo) && (
+                <div className="grid grid-cols-2 gap-4 bg-gray-50 p-4 rounded-lg">
+                  {product.weight && <div>
+                    <p className="text-sm text-gray-600">Weight</p>
+                    <p className="font-semibold text-gray-900">{product.weight}</p>
+                  </div>}
+                  {product.servings && (
+                    <div>
+                      <p className="text-sm text-gray-600">Servings</p>
+                      <p className="font-semibold text-gray-900">{product.servings}</p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {(product.nutritionInfo || product.storageInstructions || product.allergenInfo) && (
+                <div className="rounded-lg border border-gray-200 divide-y divide-gray-200">
+                  {product.nutritionInfo && <div className="p-4"><h3 className="font-semibold text-gray-900 mb-1">Nutrition information</h3><p className="text-sm text-gray-600">{product.nutritionInfo}</p></div>}
+                  {product.allergenInfo && <div className="p-4"><h3 className="font-semibold text-gray-900 mb-1">Allergen advice</h3><p className="text-sm text-gray-600">{product.allergenInfo}</p></div>}
+                  {product.storageInstructions && <div className="p-4"><h3 className="font-semibold text-gray-900 mb-1">Storage</h3><p className="text-sm text-gray-600">{product.storageInstructions}</p></div>}
+                </div>
+              )}
+            </div>
 
             {/* Product Details */}
             <motion.div
@@ -108,11 +201,11 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 </h1>
                 <p className="text-lg text-gray-700 mb-4">{product.description}</p>
                 {product.longDescription && (
-                  <p className="text-gray-600 leading-relaxed">{product.longDescription}</p>
+                  <p className="text-gray-600 leading-relaxed whitespace-pre-line">{product.longDescription}</p>
                 )}
               </div>
 
-              {/* Rating */}
+              {/* Rating 
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-1">
                   {[...Array(5)].map((_, i) => (
@@ -130,57 +223,29 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 <span className="text-gray-700">
                   {product.rating} ({product.reviews} reviews)
                 </span>
-              </div>
+              </div>*/}
 
               {/* Price */}
               <div className="text-4xl font-bold text-gray-900">
                 ${product.price.toFixed(2)}
               </div>
-
-              {/* Benefits */}
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-3">Key Benefits:</h3>
-                <div className="flex flex-wrap gap-2">
-                  {product.benefits.map((benefit, i) => (
-                    <span
-                      key={i}
-                      className="flex items-center gap-2 bg-emerald-50 text-emerald-700 px-3 py-2 rounded-lg text-sm"
-                    >
-                      <Check size={16} />
-                      {benefit}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Ingredients */}
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-3">Ingredients:</h3>
-                <ul className="space-y-1">
-                  {product.ingredients.map((ingredient, i) => (
-                    <li key={i} className="text-gray-700 flex items-center gap-2">
-                      <span className="w-2 h-2 bg-emerald-600 rounded-full" />
-                      {ingredient}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Product Info */}
-              {product.weight && (
-                <div className="grid grid-cols-2 gap-4 bg-gray-50 p-4 rounded-lg">
-                  <div>
-                    <p className="text-sm text-gray-600">Weight</p>
-                    <p className="font-semibold text-gray-900">{product.weight}</p>
+              {/* Flavors */}
+              {product.flavors && product.flavors.length > 0 && (
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-3">Choose a flavor</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {product.flavors.map((flavor) => (
+                      <button key={flavor} type="button" onClick={() => setSelectedFlavor(flavor)}
+                        className={`px-4 py-2 rounded-lg border font-medium transition-colors ${selectedFlavor === flavor ? 'border-emerald-600 bg-emerald-50 text-emerald-700' : 'border-gray-300 text-gray-700 hover:border-emerald-400'}`}>
+                        {flavor}
+                      </button>
+                    ))}
                   </div>
-                  {product.servings && (
-                    <div>
-                      <p className="text-sm text-gray-600">Servings</p>
-                      <p className="font-semibold text-gray-900">{product.servings}</p>
-                    </div>
-                  )}
+                  {!selectedFlavor && <p className="mt-2 text-sm text-gray-500">Select a flavor before adding this product.</p>}
                 </div>
               )}
+
+              
 
               {/* Quantity and Add to Cart */}
               <div className="flex gap-4 pt-4">
@@ -203,7 +268,8 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 </div>
                 <button
                   onClick={handleAddToCart}
-                  className="flex-1 btn-primary flex items-center justify-center gap-2"
+                  disabled={Boolean(product.flavors?.length && !selectedFlavor)}
+                  className="flex-1 btn-primary flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <ShoppingCart size={20} />
                   Add to Cart

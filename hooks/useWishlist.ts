@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 const WISHLIST_STORAGE_KEY = 'ecommerce-wishlist'
 
 export const useWishlist = () => {
-  const [productIds, setProductIds] = useState<string[]>([])
+  const [productIds, setProductIds] = useState<number[]>([])
   const [isLoaded, setIsLoaded] = useState(false)
 
   // Load wishlist from localStorage
@@ -26,17 +26,17 @@ export const useWishlist = () => {
     }
   }, [productIds, isLoaded])
 
-  const addToWishlist = (productId: string) => {
+  const addToWishlist = (productId: number) => {
     setProductIds(prev =>
       prev.includes(productId) ? prev : [...prev, productId]
     )
   }
 
-  const removeFromWishlist = (productId: string) => {
+  const removeFromWishlist = (productId: number) => {
     setProductIds(prev => prev.filter(id => id !== productId))
   }
 
-  const toggleWishlist = (productId: string) => {
+  const toggleWishlist = (productId: number) => {
     if (productIds.includes(productId)) {
       removeFromWishlist(productId)
     } else {
@@ -44,7 +44,7 @@ export const useWishlist = () => {
     }
   }
 
-  const isInWishlist = (productId: string) => {
+  const isInWishlist = (productId: number) => {
     return productIds.includes(productId)
   }
 

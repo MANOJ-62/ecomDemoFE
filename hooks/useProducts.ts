@@ -8,10 +8,10 @@ export const useProducts = (category?: string) => {
   })
 }
 
-export const useProduct = (productId: string) => {
+export const useProduct = (productId: string | number) => {
   return useQuery({
     queryKey: ['product', productId],
-    queryFn: () => getProductById(productId),
+    queryFn: () => getProductById(Number(productId)),
     enabled: !!productId,
   })
 }

@@ -1,82 +1,58 @@
-import { useState, useEffect } from 'react'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { CartItem, Product } from '@/types'
+import { addToCart, clearCart as clearBackendCart, getCart, removeCartItem, updateCartItemQuantity } from '@/services/cart'
+import { isAuthenticated } from '@/services/auth'
+import { CartItemResponse, CartResponse } from '@/services/types/backend'
 
-const CART_STORAGE_KEY = 'ecommerce-cart'
+const CART_QUERY_KEY = ['cart'] as const
+
+function toCartItem(item: CartItemResponse): CartItem {
+  return {
+    cartItemId: item.cartItemId,
+    productId: item.productId,
+    quantity: item.quantity,
+    flavor: item.flavor,
+    product: {
+      id: item.productId,
+      name: item.productName,
+      description: '',
+      price: item.price,
+      rating: 0,
+      reviews: 0,
+      image: item.thumbnailUrl ?? '',
+      category: '',
+      stock: 0,
+      benefits: [],
+      ingredients: [],
+    },
+  }
+}
 
 export const useCart = () => {
-  const [items, setItems] = useState<CartItem[]>([])
-  const [isLoaded, setIsLoaded] = useState(false)
+  const queryClient = useQueryClient()
+  const authenticated = typeof window !== 'undefined' && isAuthenticated()
+  const { data, isLoading } = useQuery({
+    queryKey: CART_QUERY_KEY,
+    queryFn: getCart,
+    enabled: authenticated,
+  })
+  const items = (data?.items ?? []).map(toCartItem)
+  const refresh = (cart: CartResponse) => queryClient.setQueryData(CART_QUERY_KEY, cart)
 
-  // Load cart from localStorage
-  useEffect(() => {
-    const savedCart = localStorage.getItem(CART_STORAGE_KEY)
-    if (savedCart) {
-      try {
-        setItems(JSON.parse(savedCart))
-      } catch (e) {
-        console.error('Failed to parse cart from storage:', e)
-      }
-    }
-    setIsLoaded(true)
-  }, [])
-
-  // Save cart to localStorage whenever items change
-  useEffect(() => {
-    if (isLoaded) {
-      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items))
-    }
-  }, [items, isLoaded])
-
-  const addItem = (product: Product, quantity: number = 1) => {
-    setItems(prevItems => {
-      const existingItem = prevItems.find(item => item.productId === product.id)
-      if (existingItem) {
-        return prevItems.map(item =>
-          item.productId === product.id
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
-        )
-      }
-      return [...prevItems, { productId: product.id, product, quantity }]
-    })
+  const addItem = async (product: Product, quantity = 1, flavor?: string) => {
+    refresh(await addToCart(product.id, quantity, flavor))
   }
-
-  const removeItem = (productId: string) => {
-    setItems(prevItems => prevItems.filter(item => item.productId !== productId))
+  const updateQuantity = async (cartItemId: number, quantity: number) => {
+    if (quantity <= 0) return removeItem(cartItemId)
+    refresh(await updateCartItemQuantity(cartItemId, quantity))
   }
-
-  const updateQuantity = (productId: string, quantity: number) => {
-    if (quantity <= 0) {
-      removeItem(productId)
-    } else {
-      setItems(prevItems =>
-        prevItems.map(item =>
-          item.productId === productId ? { ...item, quantity } : item
-        )
-      )
-    }
+  const removeItem = async (cartItemId: number) => refresh(await removeCartItem(cartItemId))
+  const clearCart = async () => {
+    await clearBackendCart()
+    queryClient.setQueryData<CartResponse>(CART_QUERY_KEY, (current) => current ? { ...current, items: [], totalItems: 0, totalAmount: 0 } : current)
   }
+  const subtotal = data?.totalAmount ?? 0
 
-  const clearCart = () => {
-    setItems([])
-  }
-
-  const subtotal = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
-  const tax = parseFloat((subtotal * 0.1).toFixed(2))
-  const shipping = items.length > 0 ? 5.0 : 0
-  const total = parseFloat((subtotal + tax + shipping).toFixed(2))
-
-  return {
-    items,
-    addItem,
-    removeItem,
-    updateQuantity,
-    clearCart,
-    subtotal: parseFloat(subtotal.toFixed(2)),
-    tax,
-    shipping,
-    total,
-    itemCount: items.length,
-    isLoaded,
-  }
+  return { items, addItem, removeItem, updateQuantity, clearCart, subtotal, tax: 0, shipping: 0,
+    total: subtotal, itemCount: data?.totalItems ?? 0, isLoaded: !isLoading, isAuthenticated: authenticated }
 }

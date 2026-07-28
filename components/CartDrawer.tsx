@@ -26,7 +26,7 @@ export const CartDrawer = () => {
       <div className="space-y-3 max-h-64 overflow-y-auto">
         {items.map((item) => (
           <motion.div
-            key={item.productId}
+            key={item.cartItemId}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
@@ -44,12 +44,13 @@ export const CartDrawer = () => {
               <h4 className="font-semibold text-sm text-gray-900 line-clamp-1">
                 {item.product.name}
               </h4>
+              {item.flavor && <p className="text-xs text-gray-500">Flavor: {item.flavor}</p>}
               <p className="text-xs text-gray-600">${item.product.price.toFixed(2)}</p>
 
               {/* Quantity Control */}
               <div className="flex items-center gap-2 mt-1">
                 <button
-                  onClick={() => updateQuantity(item.productId, item.quantity - 1)}
+                  onClick={() => item.cartItemId && updateQuantity(item.cartItemId, item.quantity - 1)}
                   className="px-2 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-100"
                 >
                   -
@@ -58,7 +59,7 @@ export const CartDrawer = () => {
                   {item.quantity}
                 </span>
                 <button
-                  onClick={() => updateQuantity(item.productId, item.quantity + 1)}
+                  onClick={() => item.cartItemId && updateQuantity(item.cartItemId, item.quantity + 1)}
                   className="px-2 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-100"
                 >
                   +
@@ -68,7 +69,7 @@ export const CartDrawer = () => {
 
             {/* Remove */}
             <button
-              onClick={() => removeItem(item.productId)}
+              onClick={() => item.cartItemId && removeItem(item.cartItemId)}
               className="text-gray-400 hover:text-red-600 transition-colors"
             >
               <Trash2 size={16} />

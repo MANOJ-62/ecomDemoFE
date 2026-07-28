@@ -38,7 +38,8 @@ export default function LoginPage() {
       setMessage('Login successful! Redirecting...')
   
       setTimeout(() => {
-        router.push('/')
+        const next = new URLSearchParams(window.location.search).get('next')
+        router.push(next || '/checkout')
       }, 1000)
     } else {
       setMessage('Invalid email or password')

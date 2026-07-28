@@ -39,6 +39,7 @@ export interface AdminProduct {
   reviews: number
   image: string
   description: string
+  flavors: string[]
   status: 'active' | 'inactive' | 'discontinued'
   createdAt: string
   updatedAt: string
