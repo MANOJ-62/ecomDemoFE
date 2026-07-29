@@ -48,7 +48,9 @@ export interface Customer {
 }
 
 export interface Order {
-  id: string
+  id: string                 // Order Number (display to user)
+  orderDbId: number          // Database ID (used internally)
+
   customer: Customer
   items: CartItem[]
   subtotal: number

@@ -157,17 +157,21 @@ export function mapOrderResponseToOrder(dto: OrderResponse): Order {
     country: dto.country,
   }
 
-  return {
-    id: dto.orderNumber || String(dto.id),
-    customer,
-    items: dto.items.map(mapOrderItemToCartItem),
-    subtotal: dto.subtotal,
-    tax: dto.taxAmount,
-    shipping: dto.shippingCharge,
-    total: dto.totalAmount,
-    status: orderStatusMap[dto.orderStatus] ?? 'pending',
-    createdAt: dto.createdAt,
-  }
+return {
+  id: dto.orderNumber || String(dto.id),
+  orderDbId: dto.id,
+
+  customer,
+  items: dto.items.map(mapOrderItemToCartItem),
+
+  subtotal: dto.subtotal,
+  tax: dto.taxAmount,
+  shipping: dto.shippingCharge,
+  total: dto.totalAmount,
+
+  status: orderStatusMap[dto.orderStatus] ?? 'pending',
+  createdAt: dto.createdAt,
+}
 }
 
 export function mapOrderResponseToAdminOrder(dto: OrderResponse): AdminOrder {

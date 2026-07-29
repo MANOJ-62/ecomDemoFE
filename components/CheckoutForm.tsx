@@ -3,7 +3,6 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { useState } from 'react'
 import { Loader } from 'lucide-react'
 
 const checkoutSchema = z.object({
@@ -16,6 +15,11 @@ const checkoutSchema = z.object({
   state: z.string().min(2, 'State required'),
   zipCode: z.string().min(5, 'ZIP code required'),
   country: z.string().min(2, 'Country required'),
+
+  paymentMethod: z.enum([
+    'COD',
+    'UPI'
+  ])
 })
 
 export type CheckoutFormData = z.infer<typeof checkoutSchema>
@@ -25,168 +29,283 @@ interface CheckoutFormProps {
   isLoading?: boolean
 }
 
-export const CheckoutForm = ({ onSubmit, isLoading }: CheckoutFormProps) => {
+export const CheckoutForm = ({
+  onSubmit,
+  isLoading,
+}: CheckoutFormProps) => {
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: {
+      errors,
+      isSubmitting,
+    },
   } = useForm<CheckoutFormData>({
     resolver: zodResolver(checkoutSchema),
+
+    defaultValues: {
+      paymentMethod: 'COD',
+      country: 'India',
+    },
   })
 
   const loading = isSubmitting || isLoading
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-5"
+    >
+
+      {/* First Name + Last Name */}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {/* First Name */}
+
         <div>
+
           <label className="block text-sm font-medium text-gray-700 mb-1">
             First Name
           </label>
+
           <input
-            {...register('firstName')}
+            {...register("firstName")}
             className="input-field"
             placeholder="John"
           />
+
           {errors.firstName && (
-            <p className="text-red-600 text-xs mt-1">{errors.firstName.message}</p>
+            <p className="text-xs text-red-600 mt-1">
+              {errors.firstName.message}
+            </p>
           )}
+
         </div>
 
-        {/* Last Name */}
         <div>
+
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Last Name
           </label>
+
           <input
-            {...register('lastName')}
+            {...register("lastName")}
             className="input-field"
             placeholder="Doe"
           />
+
           {errors.lastName && (
-            <p className="text-red-600 text-xs mt-1">{errors.lastName.message}</p>
+            <p className="text-xs text-red-600 mt-1">
+              {errors.lastName.message}
+            </p>
           )}
+
         </div>
+
       </div>
 
       {/* Email */}
+
       <div>
+
         <label className="block text-sm font-medium text-gray-700 mb-1">
           Email Address
         </label>
+
         <input
-          {...register('email')}
+          {...register("email")}
           type="email"
           className="input-field"
-          placeholder="john@example.com"
         />
+
         {errors.email && (
-          <p className="text-red-600 text-xs mt-1">{errors.email.message}</p>
+          <p className="text-xs text-red-600 mt-1">
+            {errors.email.message}
+          </p>
         )}
+
       </div>
 
       {/* Phone */}
+
       <div>
+
         <label className="block text-sm font-medium text-gray-700 mb-1">
           Phone Number
         </label>
+
         <input
-          {...register('phone')}
-          type="tel"
+          {...register("phone")}
           className="input-field"
-          placeholder="(555) 123-4567"
         />
+
         {errors.phone && (
-          <p className="text-red-600 text-xs mt-1">{errors.phone.message}</p>
+          <p className="text-xs text-red-600 mt-1">
+            {errors.phone.message}
+          </p>
         )}
+
       </div>
 
       {/* Address */}
+
       <div>
+
         <label className="block text-sm font-medium text-gray-700 mb-1">
           Street Address
         </label>
+
         <input
-          {...register('address')}
+          {...register("address")}
           className="input-field"
-          placeholder="123 Main Street"
         />
+
         {errors.address && (
-          <p className="text-red-600 text-xs mt-1">{errors.address.message}</p>
+          <p className="text-xs text-red-600 mt-1">
+            {errors.address.message}
+          </p>
         )}
+
       </div>
 
-      {/* City, State, ZIP */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+      {/* City State Zip */}
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
         <div>
+
           <label className="block text-sm font-medium text-gray-700 mb-1">
             City
           </label>
+
           <input
-            {...register('city')}
+            {...register("city")}
             className="input-field"
-            placeholder="Chennai"
           />
-          {errors.city && (
-            <p className="text-red-600 text-xs mt-1">{errors.city.message}</p>
-          )}
+
         </div>
 
         <div>
+
           <label className="block text-sm font-medium text-gray-700 mb-1">
             State
           </label>
+
           <input
-            {...register('state')}
+            {...register("state")}
             className="input-field"
-            placeholder="Tamil Nadu"
           />
-          {errors.state && (
-            <p className="text-red-600 text-xs mt-1">{errors.state.message}</p>
-          )}
+
         </div>
 
         <div>
+
           <label className="block text-sm font-medium text-gray-700 mb-1">
             ZIP Code
           </label>
+
           <input
-            {...register('zipCode')}
+            {...register("zipCode")}
             className="input-field"
-            placeholder="10001"
           />
-          {errors.zipCode && (
-            <p className="text-red-600 text-xs mt-1">{errors.zipCode.message}</p>
-          )}
+
         </div>
+
       </div>
 
       {/* Country */}
+
       <div>
+
         <label className="block text-sm font-medium text-gray-700 mb-1">
           Country
         </label>
-          
+
         <input
-          {...register('country')}
+          {...register("country")}
           className="input-field"
-          placeholder="India"
         />
-        {errors.country && (
-          <p className="text-red-600 text-xs mt-1">{errors.country.message}</p>
-        )}
+
       </div>
 
-      {/* Submit Button */}
+      {/* Payment Method */}
+
+      <div className="border rounded-lg p-5">
+
+        <h3 className="text-lg font-semibold mb-4">
+          Payment Method
+        </h3>
+
+        <div className="space-y-3">
+
+          <label className="flex items-center gap-3 cursor-pointer">
+
+            <input
+              type="radio"
+              value="COD"
+              {...register("paymentMethod")}
+            />
+
+            <div>
+
+              <p className="font-medium">
+                Cash on Delivery
+              </p>
+
+              <p className="text-sm text-gray-500">
+                Pay when your order is delivered.
+              </p>
+
+            </div>
+
+          </label>
+
+          <label className="flex items-center gap-3 cursor-pointer">
+
+            <input
+              type="radio"
+              value="UPI"
+              {...register("paymentMethod")}
+            />
+
+            <div>
+
+              <p className="font-medium">
+                Pay Online (Razorpay)
+              </p>
+
+              <p className="text-sm text-gray-500">
+                UPI, Cards, Net Banking, Wallets
+              </p>
+
+            </div>
+
+          </label>
+
+        </div>
+
+      </div>
+
       <button
         type="submit"
         disabled={loading}
-        className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50"
       >
-        {loading && <Loader size={18} className="animate-spin" />}
-        {loading ? 'Processing...' : 'Place Order'}
+
+        {loading && (
+          <Loader
+            size={18}
+            className="animate-spin"
+          />
+        )}
+
+        {loading
+          ? "Processing..."
+          : "Place Order"}
+
       </button>
+
     </form>
   )
+
 }

@@ -22,7 +22,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
   const handleAddToCart = (event: React.MouseEvent) => {
     event.preventDefault()
-    addItem(product, 1)
+    addItem(product, 1, product.flavors?.[0])
     setIsAddedToCart(true)
     setTimeout(() => setIsAddedToCart(false), 1800)
   }

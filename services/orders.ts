@@ -1,78 +1,118 @@
-import api, { unwrapApiResponse } from './apiClient'
-import { ApiResponse, OrderResponse } from './types/backend'
-import { mapOrderResponseToOrder } from './mappers'
-import { CartItem, Customer, Order } from '@/types'
-import { createAddressFromCustomer } from './addresses'
+import api, { unwrapApiResponse } from "./apiClient";
+import { ApiResponse, OrderResponse } from "./types/backend";
+import { mapOrderResponseToOrder } from "./mappers";
+import { CartItem, Customer, Order } from "@/types";
+import { createAddressFromCustomer } from "./addresses";
+
+export type PaymentMethodType =
+  | "COD"
+  | "UPI"
+  | "CARD"
+  | "NET_BANKING";
 
 export async function placeOrder(payload: {
-  addressId: number
-  paymentMethod: 'COD' | 'UPI' | 'CARD' | 'NET_BANKING'
-  notes?: string
+  addressId: number;
+  paymentMethod: PaymentMethodType;
+  notes?: string;
 }): Promise<OrderResponse> {
-  const response = await api.post<ApiResponse<OrderResponse>>('/orders', payload)
-  return unwrapApiResponse(response)
+  const response = await api.post<ApiResponse<OrderResponse>>(
+    "/orders",
+    payload
+  );
+
+  return unwrapApiResponse(response);
 }
 
 export async function getMyOrders(): Promise<Order[]> {
-  const response = await api.get<ApiResponse<OrderResponse[]>>('/orders')
-  const orders = unwrapApiResponse(response)
-  return orders.map(mapOrderResponseToOrder)
+  const response = await api.get<ApiResponse<OrderResponse[]>>(
+    "/orders"
+  );
+
+  return unwrapApiResponse(response).map(mapOrderResponseToOrder);
 }
 
-export async function getOrderById(orderId: number | string): Promise<Order | null> {
+export async function getOrderById(
+  orderId: number | string
+): Promise<Order | null> {
   try {
-    const response = await api.get<ApiResponse<OrderResponse>>(`/orders/${orderId}`)
-    return mapOrderResponseToOrder(unwrapApiResponse(response))
+    const response = await api.get<ApiResponse<OrderResponse>>(
+      `/orders/${orderId}`
+    );
+
+    return mapOrderResponseToOrder(
+      unwrapApiResponse(response)
+    );
   } catch {
-    return null
+    return null;
   }
 }
 
-export async function cancelOrder(orderId: number): Promise<void> {
-  const response = await api.patch<ApiResponse<null>>(`/orders/${orderId}/cancel`)
-  unwrapApiResponse(response)
+export async function cancelOrder(
+  orderId: number
+): Promise<void> {
+  const response = await api.patch<ApiResponse<null>>(
+    `/orders/${orderId}/cancel`
+  );
+
+  unwrapApiResponse(response);
 }
 
 export async function createOrder(
   items: CartItem[],
   customer: Customer,
-  _subtotal: number,
-  _tax: number,
-  _shipping: number
+  subtotal: number,
+  tax: number,
+  shipping: number,
+  paymentMethod: PaymentMethodType
 ): Promise<Order> {
-  const address = await createAddressFromCustomer(customer)
+  const address = await createAddressFromCustomer(customer);
+
   const orderResponse = await placeOrder({
     addressId: Number(address.id),
-    paymentMethod: 'COD',
-  })
+    paymentMethod,
+  });
 
-  return mapOrderResponseToOrder(orderResponse)
+  return mapOrderResponseToOrder(orderResponse);
 }
 
-export async function getOrder(orderId: string): Promise<Order | null> {
-  return getOrderById(orderId)
+export async function getOrder(
+  orderId: string
+): Promise<Order | null> {
+  return getOrderById(orderId);
 }
 
-export async function getOrderHistory(_email: string): Promise<Order[]> {
-  return getMyOrders()
+export async function getOrderHistory(): Promise<Order[]> {
+  return getMyOrders();
 }
 
 export async function getAdminOrdersList(): Promise<OrderResponse[]> {
-  const response = await api.get<ApiResponse<OrderResponse[]>>('/admin/orders')
-  return unwrapApiResponse(response)
+  const response = await api.get<ApiResponse<OrderResponse[]>>(
+    "/admin/orders"
+  );
+
+  return unwrapApiResponse(response);
 }
 
-export async function getAdminOrdersByStatus(status: OrderResponse['orderStatus']): Promise<OrderResponse[]> {
-  const response = await api.get<ApiResponse<OrderResponse[]>>(`/admin/orders/status/${status}`)
-  return unwrapApiResponse(response)
+export async function getAdminOrdersByStatus(
+  status: OrderResponse["orderStatus"]
+): Promise<OrderResponse[]> {
+  const response = await api.get<ApiResponse<OrderResponse[]>>(
+    `/admin/orders/status/${status}`
+  );
+
+  return unwrapApiResponse(response);
 }
 
 export async function updateAdminOrderStatus(
   orderId: number,
-  orderStatus: OrderResponse['orderStatus']
+  orderStatus: OrderResponse["orderStatus"]
 ): Promise<OrderResponse> {
-  const response = await api.patch<ApiResponse<OrderResponse>>(`/admin/orders/${orderId}/status`, {
-    orderStatus,
-  })
-  return unwrapApiResponse(response)
+  const response = await api.patch<ApiResponse<OrderResponse>>(
+    `/admin/orders/${orderId}/status`,
+    {
+      orderStatus,
+    }
+  );
+
+  return unwrapApiResponse(response);
 }

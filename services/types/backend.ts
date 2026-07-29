@@ -164,6 +164,14 @@ export interface PaymentResponse {
   gatewayPaymentId?: string
 }
 
+// export interface CreatePaymentResponse {
+//   paymentId: number
+//   gatewayOrderId: string
+//   gatewayKey: string
+//   currency: string
+//   amount: string
+// }
+
 export interface CreatePaymentResponse {
   paymentId: number
   gatewayOrderId: string
