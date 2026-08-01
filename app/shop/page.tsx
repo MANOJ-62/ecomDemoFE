@@ -14,9 +14,9 @@ import { getProductsPage } from '@/services/products'
 import Link from 'next/link'
 
 const featuredSlides = [
-  { title: 'Mini Thins', flavor: 'Cream N Onion', copy: 'A light, crunchy corn snack with a creamy onion twist.', image: '/products/hangrow/mini-thins-cream-n-onion.jpeg', href: '/product/1?flavor=Cream%20N%20Onion', tone: 'from-emerald-950/80 to-emerald-600/30' },
-  { title: 'Hangrow Thins', flavor: 'Lime N Lemon', copy: 'Zesty citrus flavour with the satisfying crunch of puffed thins.', image: '/products/hangrow/thins-lime-n-lemon.jpeg', href: '/product/2?flavor=Lime%20N%20Lemon', tone: 'from-lime-950/80 to-lime-600/30' },
-  { title: 'Hangrow Thins', flavor: 'Cheese Magic', copy: 'A bold cheesy crunch for every snack break.', image: '/products/hangrow/thins-cheese-magic.jpeg', href: '/product/2?flavor=Cheese%20Magic', tone: 'from-orange-950/80 to-orange-600/30' },
+  { title: 'Mini Thins', flavor: 'Cream N Onion', copy: 'A light, crunchy corn snack with a creamy onion twist.', image: '/images/hncream-onion.jpg', href: '/shop', tone: 'from-emerald-950/80 to-emerald-600/30' },
+  { title: 'Hangrow Thins', flavor: 'Lime N Lemon', copy: 'Zesty citrus flavour with the satisfying crunch of puffed thins.', image: '/images/hh6.jpg', href: '/shop', tone: 'from-lime-950/80 to-lime-600/30' },
+  { title: 'Hangrow Thins', flavor: 'Cheese Magic', copy: 'A bold cheesy crunch for every snack break.', image: '/images/hh2.jpg', href: '/shop', tone: 'from-orange-950/80 to-orange-600/30' },
 ]
 
 export default function ShopPage() {
@@ -146,7 +146,7 @@ export default function ShopPage() {
               Shop all snacks
             </h1>
             <p className="text-lg text-gray-700 font-medium">
-              Browse our delicious collection of snacks and treats from your favorite brands
+              Explore Hangrow's crunchy Thins and Mini Thins collection.
             </p>
           </motion.div>
         </section>

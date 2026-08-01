@@ -1,6 +1,5 @@
 import { User } from '@/types'
 import api, { unwrapApiResponse } from './apiClient'
-import { ApiNotAvailableError } from './errors'
 import { ApiResponse, AuthResponse } from './types/backend'
 import { mapAuthResponseToUser } from './mappers'
 
@@ -63,34 +62,3 @@ export const storeAuthData = (token: string, user: User): void => {
 }
 
 export const getAuthToken = (): string | null => getToken()
-
-export const loginWithOTP = async (_email: string): Promise<{ success: boolean; message: string }> => {
-  throw new ApiNotAvailableError('POST /api/auth/otp/send')
-}
-
-export const verifyOTPAndGetToken = async (
-  _email: string,
-  _otp: string
-): Promise<{ success: boolean; token?: string; user?: User; message: string }> => {
-  throw new ApiNotAvailableError('POST /api/auth/otp/verify')
-}
-
-export const sendOTPEmail = async (_email: string): Promise<boolean> => {
-  throw new ApiNotAvailableError('POST /api/auth/otp/send')
-}
-
-export const verifyOTP = async (_email: string, _otp: string): Promise<boolean> => {
-  throw new ApiNotAvailableError('POST /api/auth/otp/verify')
-}
-
-export const generateJWT = (_user: User): string => {
-  throw new ApiNotAvailableError('Client-side JWT generation is not supported. Use POST /api/auth/login')
-}
-
-export const verifyJWT = (_token: string): User | null => {
-  throw new ApiNotAvailableError('Client-side JWT verification is not supported. Use GET /api/users/me')
-}
-
-export const generateOTP = (): string => {
-  throw new ApiNotAvailableError('POST /api/auth/otp/send')
-}

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { ChevronDown, Heart, LogOut, Menu, Search, ShoppingBag, User as UserIcon, X } from 'lucide-react'
 import { useCart } from '@/hooks/useCart'
+import { useWishlist } from '@/hooks/useWishlist'
 import { getAuthToken, getCurrentUser, logout } from '@/services/auth'
 import { User } from '@/types'
 
@@ -22,6 +23,7 @@ export const Header = () => {
   const router = useRouter()
   const pathname = usePathname()
   const { itemCount } = useCart()
+  const { productIds } = useWishlist()
 
   useEffect(() => { if (getAuthToken()) setUser(getCurrentUser()) }, [])
 
@@ -54,7 +56,7 @@ export const Header = () => {
           </div>
           <div className="flex items-center gap-2">
             <Link href="/shop" aria-label="Search products" className="rounded p-2 hover:bg-white/10 lg:hidden"><Search size={20} /></Link>
-            <Link href="/wishlist" aria-label="Wishlist" className="rounded p-2 hover:bg-white/10"><Heart size={20} /></Link>
+            <Link href="/wishlist" aria-label={`Wishlist with ${productIds.length} items`} className="relative rounded p-2 hover:bg-white/10"><Heart size={20} />{productIds.length > 0 && <span className="absolute -right-1 -top-1 grid h-4 min-w-4 place-items-center rounded-full bg-[#eba11d] px-1 text-[9px] font-black text-[#2f1b16]">{productIds.length > 9 ? '9+' : productIds.length}</span>}</Link>
             {user ? (
               <div className="relative hidden sm:block">
                 <button onClick={() => setIsDropdownOpen((value) => !value)} className="flex items-center gap-2 rounded p-2 text-sm font-semibold hover:bg-white/10"><UserIcon size={18} /> {user.name}</button>

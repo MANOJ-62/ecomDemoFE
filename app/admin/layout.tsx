@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { AdminSidebar } from '@/components/AdminSidebar'
 
 export const metadata: Metadata = {
-  title: 'Admin Dashboard - FoodZone',
-  description: 'Manage your FoodZone store',
+  title: 'Admin Dashboard - Divaksha',
+  description: 'Manage your Divaksha store',
 }
 
 export default function AdminLayout({

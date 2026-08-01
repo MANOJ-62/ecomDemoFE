@@ -31,7 +31,7 @@ export default function LoginPage() {
       return
     }
   
-    const result = await login(email, password)
+    const result = await login(email.toLowerCase(), password)
   
     if (result) {
       setSuccess(true)
@@ -39,7 +39,7 @@ export default function LoginPage() {
   
       setTimeout(() => {
         const next = new URLSearchParams(window.location.search).get('next')
-        router.push(next || '/checkout')
+        router.push(next || '/shop')
       }, 1000)
     } else {
       setMessage('Invalid email or password')
@@ -61,7 +61,7 @@ export default function LoginPage() {
           <div className="bg-white rounded-2xl shadow-xl p-8 border border-emerald-200">
             {/* Header */}
             <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
-              <h1 className="text-3xl font-bold gradient-text mb-2">Welcome to FoodZone</h1>
+              <h1 className="text-3xl font-bold gradient-text mb-2">Welcome to Divaksha</h1>
               <p className="text-gray-600">
                 Sign in using your email and password
               </p>
@@ -164,13 +164,6 @@ export default function LoginPage() {
             </motion.div>
           </div>
 
-          {/* Additional Info */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="mt-8">
-            <div className="bg-emerald-100 border-l-4 border-emerald-600 p-4 rounded-lg">
-              <p className="text-sm text-emerald-900 font-medium">Demo OTP</p>
-              <p className="text-xs text-emerald-800 mt-1">Use any 6-digit code (e.g., 123456)</p>
-            </div>
-          </motion.div>
         </motion.div>
       </main>
 

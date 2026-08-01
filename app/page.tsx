@@ -32,7 +32,7 @@ export default function Home() {
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: .97 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .45 }} className="relative mx-auto h-[360px] w-full max-w-[500px] overflow-hidden bg-[#e7ddd2] md:h-[440px]">
             <div className="absolute inset-x-[10%] bottom-0 h-[62%] bg-[#d9c8b8]" />
-            <Image src="/products/pringles.png" alt="Featured snack selection" fill priority sizes="(max-width: 768px) 90vw, 45vw" className="object-contain p-8 drop-shadow-2xl" />
+            <Image src="/images/handgrowthins.png" alt="Hangrow Thins snack selection" fill priority sizes="(max-width: 768px) 90vw, 45vw" className="object-contain p-8 drop-shadow-2xl" />
             <span className="absolute left-5 top-5 bg-[#4a2a22] px-3 py-2 text-xs font-bold uppercase tracking-[.12em] text-white">New arrivals</span>
           </motion.div>
         </div>

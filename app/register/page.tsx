@@ -313,12 +313,12 @@ export default function RegisterPage() {
                 animate={{ opacity: 1, y: 0 }}
                 className="text-center mb-8"
               >
-                <h1 className="text-3xl font-bold gradient-text mb-2">Join FoodZone</h1>
+                <h1 className="text-3xl font-bold gradient-text mb-2">Join Divaksha</h1>
                 <p className="text-gray-600">
                   {step === 'email' && 'Enter your email to get started'}
                   {step === 'otp' && 'Verify your email with OTP'}
                   {step === 'details' && 'Complete your profile'}
-                  {step === 'complete' && 'Welcome to FoodZone!'}
+                  {step === 'complete' && 'Welcome to Divaksha!'}
                 </p>
               </motion.div>
 
@@ -715,7 +715,7 @@ export default function RegisterPage() {
                     </motion.div>
                     <h2 className="text-2xl font-bold text-gray-800 mb-2">Registration Complete!</h2>
                     <p className="text-gray-600 mb-6">
-                      Welcome to FoodZone! You&apos;re being redirected to login...
+                      Welcome to Divaksha! You&apos;re being redirected to login...
                     </p>
                     <div className="flex justify-center">
                       <Loader className="animate-spin text-emerald-600" size={24} />
@@ -747,22 +747,6 @@ export default function RegisterPage() {
             </div>
           </div>
 
-          {/* Demo Info */}
-          {step !== 'complete' && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="mt-8"
-            >
-              <div className="bg-blue-100 border-l-4 border-blue-600 p-4 rounded-lg">
-                <p className="text-sm text-blue-900 font-medium">OTP Demo Mode</p>
-                <p className="text-xs text-blue-800 mt-1">
-                  Check the browser console (F12) to see the generated OTP code
-                </p>
-              </div>
-            </motion.div>
-          )}
         </motion.div>
       </main>
 

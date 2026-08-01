@@ -63,10 +63,12 @@ export default function CartPage() {
                     className="flex gap-4 p-4 bg-gray-50 rounded-lg border border-gray-200"
                   >
                     {/* Image placeholder */}
-                    <div className="w-24 h-24 bg-gradient-to-br from-emerald-50 to-teal-50 rounded flex items-center justify-center flex-shrink-0">
-                      <span className="text-xs text-gray-400 text-center px-2">
-                        {item.product.name}
-                      </span>
+                    <div className="w-24 h-24 bg-white rounded border border-gray-200 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                      <img
+                        src={item.image || item.product.image}
+                        alt={item.product.name}
+                        className="w-full h-full object-contain"
+                      />
                     </div>
 
                     {/* Details */}

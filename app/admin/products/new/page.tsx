@@ -17,7 +17,7 @@ export default function NewProductPage() {
     stock: 0,
     rating: 4.5,
     reviews: 0,
-    image: '/products/default.png',
+    image: '/images/handgrowthins.png',
     description: '',
     flavors: [] as string[],
     status: 'active',

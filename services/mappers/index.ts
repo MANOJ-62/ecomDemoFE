@@ -22,6 +22,7 @@ export function mapProductResponseToProduct(dto: ProductResponse): Product {
     rating: 0,
     reviews: 0,
     image: dto.thumbnailUrl ?? dto.images?.[0] ?? '',
+    images: dto.images ?? (dto.thumbnailUrl ? [dto.thumbnailUrl] : []),
     category: dto.categoryName ?? '',
     stock: dto.stock,
     benefits: dto.highlights ?? [],

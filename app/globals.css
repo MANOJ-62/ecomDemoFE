@@ -240,8 +240,8 @@
 [class*="hover:text-emerald-"]:hover { color: #4a2a22 !important; }
 [class*="hover:bg-emerald-"]:hover { background-color: #f6eedf !important; }
 [class*="from-emerald-"] { --tw-gradient-from: #4a2a22 var(--tw-gradient-from-position) !important; }
-[class*="via-amber-"], [class*="via-Amber-"] { --tw-gradient-via: #5b6a35 var(--tw-gradient-via-position) !important; }
-[class*="to-amber-"], [class*="to-Amber-"] { --tw-gradient-to: #eba11d var(--tw-gradient-to-position) !important; }
+[class*="via-amber-"], [class*="via-amber-"] { --tw-gradient-via: #5b6a35 var(--tw-gradient-via-position) !important; }
+[class*="to-amber-"], [class*="to-amber-"] { --tw-gradient-to: #eba11d var(--tw-gradient-to-position) !important; }
 
 .surface-card { border: 1px solid #e7ddd2; border-radius: .5rem; background: #fff; box-shadow: 0 6px 24px rgb(47 27 22 / 8%); }
 .section-eyebrow { color: #5b6a35; font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
