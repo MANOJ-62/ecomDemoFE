@@ -119,17 +119,17 @@ export default function ShopPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#fff8eb] text-[#16130f] flex flex-col">
+    <div className="min-h-screen bg-[#fffcf7] text-[#2f1b16] flex flex-col">
       <Header />
 
       <main className="flex-1">
         <section className="container-custom pt-8">
-          <div className="relative min-h-[340px] overflow-hidden rounded-[2rem] border-2 border-black shadow-[8px_8px_0_#16130f] bg-gray-900">
+          <div className="relative min-h-[320px] overflow-hidden border border-[#e7ddd2] bg-[#4a2a22] shadow-[0_8px_28px_rgba(47,27,22,.12)]">
             {featuredSlides.map((slide, index) => (
               <div key={slide.flavor} className={`absolute inset-0 transition-opacity duration-700 ${activeSlide === index ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                 <img src={slide.image} alt={`${slide.title} ${slide.flavor}`} className="absolute inset-0 w-full h-full object-cover object-center" />
                 <div className={`absolute inset-0 bg-gradient-to-r ${slide.tone}`} />
-                <div className="relative h-full min-h-[340px] flex items-center px-8 sm:px-14 text-white max-w-xl"><div><p className="mb-3 inline-flex rounded-full bg-[#ffd92f] px-3 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-black">Best seller</p><h2 className="electric-title text-5xl sm:text-6xl mb-2">{slide.title}</h2><p className="text-xl font-black mb-4 text-[#ffd92f]">{slide.flavor}</p><p className="text-white/90 font-medium mb-7">{slide.copy}</p><Link href={slide.href} className="inline-block rounded-full border-2 border-black bg-white px-6 py-3 font-black text-black shadow-[4px_4px_0_#ffd92f]">Shop now</Link></div></div>
+                <div className="relative h-full min-h-[320px] flex items-center px-7 sm:px-12 text-white max-w-xl"><div><p className="mb-3 inline-flex bg-[#eba11d] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-[#2f1b16]">Best seller</p><h2 className="text-4xl sm:text-5xl font-bold tracking-[-.04em] mb-2">{slide.title}</h2><p className="text-xl font-semibold mb-4 text-[#f7d586]">{slide.flavor}</p><p className="text-white/90 mb-7">{slide.copy}</p><Link href={slide.href} className="inline-block rounded-md bg-[#eba11d] px-5 py-3 font-bold text-[#2f1b16] hover:bg-[#c97c08]">Shop now</Link></div></div>
               </div>
             ))}
             <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">{featuredSlides.map((slide, index) => <button key={slide.flavor} aria-label={`Show ${slide.flavor}`} onClick={() => setActiveSlide(index)} className={`h-2.5 rounded-full transition-all ${activeSlide === index ? 'w-7 bg-white' : 'w-2.5 bg-white/60'}`} />)}</div>
@@ -141,8 +141,8 @@ export default function ShopPage() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <span className="electric-kicker mb-5">Pick your crunch</span>
-            <h1 className="electric-title text-5xl sm:text-7xl text-gray-900 mb-4">
+            <span className="section-eyebrow mb-4 block">Browse the collection</span>
+            <h1 className="page-title mb-4">
               Shop all snacks
             </h1>
             <p className="text-lg text-gray-700 font-medium">
@@ -159,7 +159,7 @@ export default function ShopPage() {
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="electric-card space-y-4 p-5"
+                className="rounded-md border border-[#e7ddd2] bg-white space-y-4 p-5"
               >
                 <h3 className="text-lg font-bold text-gray-900">Categories</h3>
                 <div className="space-y-2">
@@ -169,8 +169,8 @@ export default function ShopPage() {
                       onClick={() => setSelectedCategory(category)}
                       className={`w-full text-left px-4 py-2 rounded-lg transition-all duration-200 font-medium ${
                         selectedCategory === category
-                          ? 'border-2 border-black bg-[#ffd92f] text-black shadow-[3px_3px_0_#16130f]'
-                          : 'border-2 border-transparent bg-[#fff8eb] text-gray-700 hover:border-black hover:bg-[#78d7ff]'
+                          ? 'bg-[#4a2a22] text-white'
+                          : 'border border-transparent bg-white text-gray-700 hover:bg-[#f6eedf] hover:border-[#e7ddd2]'
                       }`}
                     >
                       {category}
@@ -184,7 +184,7 @@ export default function ShopPage() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1 }}
-                className="mt-8 rounded-2xl border-2 border-black/15 bg-white p-5"
+                className="mt-6 border-t border-[#e7ddd2] pt-6"
               >
                 <h3 className="text-lg font-bold text-gray-900 mb-4">Price Range</h3>
                 <div className="space-y-3 text-sm">
@@ -213,7 +213,7 @@ export default function ShopPage() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
-                className="mt-5 rounded-2xl border-2 border-black/15 bg-white p-5"
+                className="mt-6 border-t border-[#e7ddd2] pt-6"
               >
                 <h3 className="text-lg font-bold text-gray-900 mb-4">Rating</h3>
                 <div className="space-y-3 text-sm">
@@ -268,7 +268,7 @@ export default function ShopPage() {
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className="px-4 py-3 border-2 border-black rounded-full focus:outline-none focus:ring-4 focus:ring-[#ffd92f] font-bold bg-white text-gray-900 cursor-pointer"
+                    className="px-4 py-3 border border-[#e7ddd2] rounded-md focus:outline-none focus:ring-2 focus:ring-[#eba11d]/40 font-medium bg-white text-gray-900 cursor-pointer"
                   >
                     <option value="newest">Newest</option>
                     <option value="price-low">Price: Low to High</option>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, use } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
@@ -13,8 +13,11 @@ import { useEffect } from 'react'
 import { getProductById } from '@/services/products'
 import { isAuthenticated } from '@/services/auth'
 
-export default function ProductPage({ params }: { params: Promise<{ id: number }> }) {
-  const { id } = use(params)
+
+export default function ProductPage() {
+  const searchParams = useSearchParams();
+  const idParam = searchParams.get("id");
+  const id = idParam ? Number(idParam) : null;
   const [product, setProduct] = useState<Product | null>(null)
   const [isLoading, setLoading] = useState(true)
   const { addItem } = useCart()
@@ -26,6 +29,10 @@ export default function ProductPage({ params }: { params: Promise<{ id: number }
   const productImage = selectedFlavor ? product?.flavorImages?.[selectedFlavor] ?? product?.image : product?.image
 
   useEffect(() => {
+    if (id === null) {
+      setLoading(false);
+      return;
+    }
     const fetchProduct = async () => {
       try {
         setLoading(true)

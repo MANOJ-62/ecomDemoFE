@@ -42,12 +42,12 @@ export default function CheckoutPage() {
   }, [addItem])
 
   if (restoringPendingCart) {
-    return <div className="min-h-screen flex items-center justify-center"><Loader className="animate-spin text-emerald-600" /></div>
+    return <div className="min-h-screen flex items-center justify-center"><Loader className="animate-spin text-[#5b6a35]" /></div>
   }
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-white flex flex-col">
+      <div className="min-h-screen bg-[#fffcf7] flex flex-col">
         <Header />
         <main className="flex-1 container-custom py-16 text-center">
           <ShoppingCart size={64} className="mx-auto text-gray-300 mb-4" />
@@ -125,7 +125,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-[#fffcf7] flex flex-col">
       <Header />
 
       <main className="flex-1">
@@ -133,7 +133,7 @@ export default function CheckoutPage() {
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl font-bold text-gray-900 mb-12"
+            className="page-title mb-10"
           >
             Checkout
           </motion.h1>
@@ -145,7 +145,7 @@ export default function CheckoutPage() {
               animate={{ opacity: 1, x: 0 }}
               className="lg:col-span-2"
             >
-              <div className="bg-white rounded-lg border border-gray-200 p-8">
+              <div className="surface-card p-5 sm:p-8">
                 {error && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
@@ -165,7 +165,7 @@ export default function CheckoutPage() {
               animate={{ opacity: 1, x: 0 }}
               className="lg:col-span-1"
             >
-              <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 sticky top-20">
+              <div className="sticky top-20 rounded-md border border-[#e7ddd2] bg-[#f6eedf] p-6">
                 <h2 className="text-xl font-bold text-gray-900 mb-6">Order Summary</h2>
 
                 {/* Items */}

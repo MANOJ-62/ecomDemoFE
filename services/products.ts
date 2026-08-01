@@ -43,7 +43,6 @@ export async function getProducts(category?: string): Promise<Product[]> {
 
 export async function getProductById(id: number): Promise<Product | null> {
   const numericId = typeof id === 'string' ? parseInt(id, 10) : id
-debugger;
   if (!Number.isNaN(numericId) && String(numericId) === String(id).trim()) {
     try {
       const response = await api.get<ApiResponse<ProductResponse>>(`/products/${numericId}`)
