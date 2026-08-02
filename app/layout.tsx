@@ -6,27 +6,25 @@ import './globals.css'
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   title: {
-    default: 'Divaksha — Big Crunch. Zero Boring.',
+    default: 'Divaksha — Good Snacks. Good Moments.',
     template: '%s · Divaksha',
   },
-  description: 'Iconic chips, global flavours and cult-favourite snacks delivered straight to your door.',
+  description: 'Discover curated favourites and delicious everyday snacks, delivered straight to your door.',
   openGraph: {
-    title: 'Divaksha — Big Crunch. Zero Boring.',
-    description: 'Iconic chips, global flavours and cult-favourite snacks delivered straight to your door.',
+    title: 'Divaksha — Good Snacks. Good Moments.',
+    description: 'Discover curated favourites and delicious everyday snacks, delivered straight to your door.',
     type: 'website',
-    images: [{ url: '/og.png', width: 1536, height: 1024, alt: 'Divaksha — Big Crunch. Zero Boring.' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Divaksha — Big Crunch. Zero Boring.',
-    description: 'Iconic chips, global flavours and cult-favourite snacks delivered straight to your door.',
-    images: ['/og.png'],
+    title: 'Divaksha — Good Snacks. Good Moments.',
+    description: 'Discover curated favourites and delicious everyday snacks, delivered straight to your door.',
   },
 }
 
 export const viewport: Viewport = {
   colorScheme: 'light',
-  themeColor: '#ff4d00',
+  themeColor: '#4a2a22',
 }
 
 export default function RootLayout({
@@ -36,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased bg-[#fff8eb] text-[#16130f]">
+      <body className="antialiased bg-[#fffcf7] text-[#2f1b16]">
         <Providers>
           {children}
         </Providers>

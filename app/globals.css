@@ -59,20 +59,20 @@
 
 :root {
   color-scheme: light;
-  --background: #fff8eb;
-  --foreground: #16130f;
+  --background: #fffcf7;
+  --foreground: #2f1b16;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #ff4d00;
-  --primary-foreground: #ffffff;
+  --primary: #eba11d;
+  --primary-foreground: #2f1b16;
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: #ffd92f;
-  --accent-foreground: #16130f;
+  --accent: #f6eedf;
+  --accent-foreground: #2f1b16;
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
@@ -82,7 +82,7 @@
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 1rem;
+  --radius: 0.5rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -172,10 +172,7 @@
   body {
     @apply bg-background text-foreground;
     font-family: Arial, Helvetica, sans-serif;
-    background-image:
-      radial-gradient(circle at 8% 5%, rgb(255 217 47 / 14%) 0 9rem, transparent 9.1rem),
-      radial-gradient(circle at 95% 18%, rgb(120 215 255 / 12%) 0 12rem, transparent 12.1rem);
-    background-attachment: fixed;
+    background: #fffcf7;
   }
   
   html {
@@ -185,17 +182,24 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 bg-black text-white rounded-full font-bold transition-all duration-200 active:scale-95 shadow-lg;
-    box-shadow: 4px 4px 0 #ff4d00;
+    @apply inline-flex items-center justify-center rounded-lg px-6 py-3 font-bold transition-all duration-200 active:scale-95;
+    background: #eba11d;
+    color: #2f1b16;
   }
 
+  .btn-primary:hover { background: #c97c08; transform: translateY(-1px); }
+
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 border-2 border-black text-black rounded-full font-bold transition-all duration-200;
-    background: #ffd92f;
+    @apply inline-flex items-center justify-center rounded-lg border px-6 py-3 font-bold transition-all duration-200;
+    border-color: #4a2a22;
+    color: #4a2a22;
+    background: #fff;
   }
 
   .btn-small {
-    @apply px-4 py-2 bg-black text-white rounded-full font-bold transition-all duration-200;
+    @apply rounded-lg px-4 py-2 font-bold transition-all duration-200;
+    background: #eba11d;
+    color: #2f1b16;
   }
 
   .container-custom {
@@ -203,80 +207,49 @@
   }
 
   .input-field {
-    @apply w-full px-4 py-3 border-2 border-black/15 rounded-2xl bg-white focus:outline-none focus:border-orange-500 focus:ring-4 focus:ring-orange-200 transition-colors duration-200;
+    @apply w-full rounded-lg border bg-white px-4 py-3 focus:outline-none focus:ring-2 transition-colors duration-200;
+    border-color: #e7ddd2;
+    --tw-ring-color: rgb(235 161 29 / 35%);
   }
 
   .gradient-text {
-    @apply text-orange-600;
+    color: #4a2a22;
   }
 
   .glass {
-    @apply bg-white/90 backdrop-blur-lg border border-white/30 shadow-xl;
+    @apply border bg-white/90 backdrop-blur-lg shadow-xl;
+    border-color: #e7ddd2;
   }
 
-  .card-hover {
-    @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-1;
-  }
+  .card-hover { @apply transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg; }
 }
 
-/* Electric Pop compatibility layer for legacy screens */
+/* Premium commerce compatibility layer for existing route markup. */
 :where(.min-h-screen).bg-white,
-:where(.min-h-screen)[class*="from-emerald-"] {
-  background: #fff8eb !important;
-}
+:where(.min-h-screen)[class*="from-emerald-"] { background: #fffcf7 !important; }
 
-[class*="text-emerald-"] { color: #ff4d00 !important; }
-[class*="bg-emerald-50"] { background-color: #fff1da !important; }
-[class*="bg-emerald-100"] { background-color: #ffd92f !important; }
+[class*="text-emerald-"] { color: #5b6a35 !important; }
+[class*="bg-emerald-50"] { background-color: #f6eedf !important; }
+[class*="bg-emerald-100"] { background-color: #eef0e7 !important; }
 [class*="bg-emerald-600"],
 [class*="bg-emerald-700"],
 [class*="bg-emerald-800"],
-[class*="bg-emerald-900"] { background-color: #ff4d00 !important; }
-[class*="border-emerald-"] { border-color: #ffb28f !important; }
-[class*="accent-emerald-"] { accent-color: #ff4d00 !important; }
-[class*="hover:text-emerald-"]:hover { color: #ff4d00 !important; }
-[class*="hover:bg-emerald-"]:hover { background-color: #ffe5ca !important; }
-[class*="from-emerald-"] { --tw-gradient-from: #ff4d00 var(--tw-gradient-from-position) !important; }
-[class*="via-amber-"],
-[class*="via-Amber-"] { --tw-gradient-via: #ffd92f var(--tw-gradient-via-position) !important; }
-[class*="to-amber-"],
-[class*="to-Amber-"] { --tw-gradient-to: #ffd92f var(--tw-gradient-to-position) !important; }
+[class*="bg-emerald-900"] { background-color: #4a2a22 !important; }
+[class*="border-emerald-"] { border-color: #d9c8b8 !important; }
+[class*="accent-emerald-"] { accent-color: #5b6a35 !important; }
+[class*="hover:text-emerald-"]:hover { color: #4a2a22 !important; }
+[class*="hover:bg-emerald-"]:hover { background-color: #f6eedf !important; }
+[class*="from-emerald-"] { --tw-gradient-from: #4a2a22 var(--tw-gradient-from-position) !important; }
+[class*="via-amber-"], [class*="via-amber-"] { --tw-gradient-via: #5b6a35 var(--tw-gradient-via-position) !important; }
+[class*="to-amber-"], [class*="to-amber-"] { --tw-gradient-to: #eba11d var(--tw-gradient-to-position) !important; }
 
-.electric-card {
-  border: 2px solid #16130f;
-  border-radius: 1.5rem;
-  background: #fff;
-  box-shadow: 6px 6px 0 #16130f;
-}
+.surface-card { border: 1px solid #e7ddd2; border-radius: .5rem; background: #fff; box-shadow: 0 6px 24px rgb(47 27 22 / 8%); }
+.section-eyebrow { color: #5b6a35; font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.page-title { color: #2f1b16; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.1; }
+.electric-card { border: 1px solid #e7ddd2; border-radius: .5rem; background: #fff; box-shadow: 0 6px 24px rgb(47 27 22 / 8%); }
+.electric-kicker { color: #5b6a35; font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.electric-title { color: #2f1b16; font-weight: 800; letter-spacing: -.04em; line-height: 1.1; text-transform: none; }
 
-.electric-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: .5rem;
-  border-radius: 999px;
-  background: #ffd92f;
-  padding: .55rem .9rem;
-  color: #16130f;
-  font-size: .72rem;
-  font-weight: 900;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-}
+main input:not([type="checkbox"]):not([type="radio"]), main select, main textarea { border-radius: .5rem !important; }
 
-.electric-title {
-  font-weight: 900;
-  letter-spacing: -.065em;
-  line-height: .88;
-  text-transform: uppercase;
-}
-
-main h1,
-main h2 {
-  letter-spacing: -.045em;
-}
-
-main input:not([type="checkbox"]):not([type="radio"]),
-main select,
-main textarea {
-  border-radius: 1rem !important;
-}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }

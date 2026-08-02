@@ -3,7 +3,9 @@ import { ApiResponse } from './types/backend'
 import { ApiError } from './errors'
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:8080/api',
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL ?? 
+  // 'https://checkout-advice-inbox-meanwhile.trycloudflare.com/',
+  'http://localhost:8080/api',
   headers: {
     'Content-Type': 'application/json',
   },

@@ -7,6 +7,7 @@ export interface Product {
   rating: number
   reviews: number
   image: string
+  images?: string[]
   category: string
   stock: number
   benefits: string[]
@@ -26,6 +27,7 @@ export interface CartItem {
   product: Product
   quantity: number
   flavor?: string
+  image?: string
 }
 
 export interface Cart {

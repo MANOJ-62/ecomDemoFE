@@ -63,7 +63,7 @@ export default function AdminDashboard() {
         {[
           {
             label: 'Total Revenue',
-            value: `$₹{stats.totalRevenue.toFixed(2)}`,
+            value: `$â‚¹{stats.totalRevenue.toFixed(2)}`,
             icon: DollarSign,
             color: 'from-emerald-600 to-amber-600',
           },
@@ -71,7 +71,7 @@ export default function AdminDashboard() {
             label: 'Total Orders',
             value: stats.totalOrders.toString(),
             icon: ShoppingCart,
-            color: 'from-Amber-600 to-orange-600',
+            color: 'from-amber-600 to-orange-600',
           },
           {
             label: 'Total Customers',
@@ -87,7 +87,7 @@ export default function AdminDashboard() {
           },
           {
             label: 'Avg Order Value',
-            value: `$₹{stats.averageOrderValue.toFixed(2)}`,
+            value: `$â‚¹{stats.averageOrderValue.toFixed(2)}`,
             icon: TrendingUp,
             color: 'from-green-600 to-teal-600',
           },
@@ -128,7 +128,7 @@ export default function AdminDashboard() {
               <YAxis />
               <Tooltip
                 contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
-                formatter={(value) => `$₹{value}`}
+                formatter={(value) => `$â‚¹{value}`}
               />
               <Legend />
               <Line

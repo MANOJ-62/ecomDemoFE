@@ -89,6 +89,11 @@ export interface CartResponse {
   items: CartItemResponse[]
 }
 
+export interface WishlistResponse {
+  wishlistId: number
+  productIds: number[]
+}
+
 export interface AddressResponse {
   id: number
   type: 'HOME' | 'OFFICE' | 'OTHER'

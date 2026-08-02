@@ -6,12 +6,12 @@ import { Save, AlertCircle } from 'lucide-react'
 
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState({
-    storeName: 'FoodZone',
-    storeEmail: 'support@foodzone.com',
-    storePhone: '+1-555-FOODZONE',
-    currency: 'USD',
-    taxRate: 8.5,
-    shippingCost: 5.99,
+    storeName: 'Divaksha',
+    storeEmail: 'support@divaksha.com',
+    storePhone: '',
+    currency: 'INR',
+    taxRate: 0,
+    shippingCost: 0,
     maintenanceMode: false,
   })
 
