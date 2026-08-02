@@ -61,7 +61,7 @@ export default function LoginPage() {
           <div className="bg-white rounded-2xl shadow-xl p-8 border border-emerald-200">
             {/* Header */}
             <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
-              <h1 className="text-3xl font-bold gradient-text mb-2">Welcome to Divaksha</h1>
+              <h1 className="text-3xl font-bold gradient-text mb-2">Welcome to Hangrow</h1>
               <p className="text-gray-600">
                 Sign in using your email and password
               </p>

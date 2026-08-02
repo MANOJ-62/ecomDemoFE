@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { AdminSidebar } from '@/components/AdminSidebar'
 
 export const metadata: Metadata = {
-  title: 'Admin Dashboard - Divaksha',
-  description: 'Manage your Divaksha store',
+  title: 'Admin Dashboard - Hangrow',
+  description: 'Manage your Hangrow store',
 }
 
 export default function AdminLayout({

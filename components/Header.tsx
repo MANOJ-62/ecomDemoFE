@@ -1,5 +1,6 @@
 'use client'
 
+import Image from "next/image";
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
@@ -41,7 +42,10 @@ export const Header = () => {
       </div>
       <div className="border-b border-[#e7ddd2] bg-[#4a2a22] text-white">
         <div className="container-custom flex h-16 items-center justify-between gap-5">
-          <Link href="/" className="shrink-0 text-2xl font-black tracking-[-.06em] text-white">DIVAKSHA<span className="text-[#eba11d]">.</span></Link>
+          {/* <Link href="/" className="shrink-0 text-2xl font-black tracking-[-.06em] text-white">HANGROW<span className="text-[#eba11d]">.</span></Link> */}
+          <Link href="/" className="shrink-0 flex items-center">
+            <Image src="/images/logo.png" alt="Hangrow" width={180} height={50} priority className="h-14 w-auto" />
+          </Link>
           <nav className="hidden items-center gap-7 lg:flex">
             {navItems.map((item, index) => (
               <Link key={`${item.label}-${index}`} href={item.href} className={`flex items-center gap-1 text-sm font-semibold tracking-wide transition hover:text-[#eba11d] ${pathname === item.href && index === 0 ? 'text-[#eba11d]' : ''}`}>

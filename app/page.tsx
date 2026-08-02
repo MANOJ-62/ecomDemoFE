@@ -27,7 +27,7 @@ export default function Home() {
             <p className="section-eyebrow mb-4">Everyday snacks, thoughtfully chosen</p>
             <h1 className="text-4xl font-extrabold leading-[1.06] tracking-[-.05em] text-[#2f1b16] sm:text-5xl lg:text-6xl">Good snacks for every good moment.</h1>
             <p className="mt-6 text-lg leading-relaxed text-[#70635e]">Discover familiar favourites and exciting new finds, delivered straight to your doorstep.</p>
-            <div className="mt-8 flex flex-wrap gap-3"><Link href="/shop" className="btn-primary gap-2">Shop all snacks <ArrowRight size={17} /></Link><Link href="/about" className="btn-secondary">Why Divaksha</Link></div>
+            <div className="mt-8 flex flex-wrap gap-3"><Link href="/shop" className="btn-primary gap-2">Shop all snacks <ArrowRight size={17} /></Link><Link href="/about" className="btn-secondary">Why Hangrow</Link></div>
             <div className="mt-8 flex items-center gap-2 text-sm font-medium text-[#70635e]"><span className="flex text-[#eba11d]">{[...Array(5)].map((_, index) => <Star key={index} size={16} fill="currentColor" />)}</span> Loved by snackers across India</div>
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: .97 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .45 }} className="relative mx-auto h-[360px] w-full max-w-[500px] overflow-hidden bg-[#e7ddd2] md:h-[440px]">

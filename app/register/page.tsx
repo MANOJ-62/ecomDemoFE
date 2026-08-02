@@ -313,12 +313,12 @@ export default function RegisterPage() {
                 animate={{ opacity: 1, y: 0 }}
                 className="text-center mb-8"
               >
-                <h1 className="text-3xl font-bold gradient-text mb-2">Join Divaksha</h1>
+                <h1 className="text-3xl font-bold gradient-text mb-2">Join Hangrow</h1>
                 <p className="text-gray-600">
                   {step === 'email' && 'Enter your email to get started'}
                   {step === 'otp' && 'Verify your email with OTP'}
                   {step === 'details' && 'Complete your profile'}
-                  {step === 'complete' && 'Welcome to Divaksha!'}
+                  {step === 'complete' && 'Welcome to Hangrow!'}
                 </p>
               </motion.div>
 
@@ -715,7 +715,7 @@ export default function RegisterPage() {
                     </motion.div>
                     <h2 className="text-2xl font-bold text-gray-800 mb-2">Registration Complete!</h2>
                     <p className="text-gray-600 mb-6">
-                      Welcome to Divaksha! You&apos;re being redirected to login...
+                      Welcome to Hangrow! You&apos;re being redirected to login...
                     </p>
                     <div className="flex justify-center">
                       <Loader className="animate-spin text-emerald-600" size={24} />

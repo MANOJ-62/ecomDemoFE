@@ -6,18 +6,18 @@ import './globals.css'
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   title: {
-    default: 'Divaksha — Good Snacks. Good Moments.',
-    template: '%s · Divaksha',
+    default: 'Hangrow — Good Snacks. Good Moments.',
+    template: '%s · Hangrow',
   },
   description: 'Discover curated favourites and delicious everyday snacks, delivered straight to your door.',
   openGraph: {
-    title: 'Divaksha — Good Snacks. Good Moments.',
+    title: 'Hangrow — Good Snacks. Good Moments.',
     description: 'Discover curated favourites and delicious everyday snacks, delivered straight to your door.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Divaksha — Good Snacks. Good Moments.',
+    title: 'Hangrow — Good Snacks. Good Moments.',
     description: 'Discover curated favourites and delicious everyday snacks, delivered straight to your door.',
   },
 }

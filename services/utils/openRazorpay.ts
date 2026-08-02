@@ -26,7 +26,7 @@ export function openRazorpayCheckout(
 
       order_id: options.gatewayOrderId,
 
-      name: options.companyName ?? "Divaksha",
+      name: options.companyName ?? "Hangrow",
 
       description: options.description ?? "Order Payment",
 

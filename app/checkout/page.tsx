@@ -89,7 +89,7 @@ export default function CheckoutPage() {
           gatewayOrderId: paymentIntent.gatewayOrderId,
           amount: paymentIntent.amount,
           currency: paymentIntent.currency,
-          companyName: 'Divaksha',
+          companyName: 'Hangrow',
           description: `Order ${order.id} Payment`,
         })
 
@@ -170,8 +170,8 @@ export default function CheckoutPage() {
 
                 {/* Items */}
                 <div className="space-y-3 mb-6 pb-6 border-b border-gray-300">
-                  {items.map((item) => (
-                    <div key={item.productId} className="flex justify-between text-sm">
+                  {items.map((item, index) => (
+                    <div key={`${item.productId}-${index}`} className="flex justify-between text-sm">
                       <div>
                         <p className="font-medium text-gray-900">{item.product.name}</p>
                         <p className="text-gray-600">Qty: {item.quantity}</p>

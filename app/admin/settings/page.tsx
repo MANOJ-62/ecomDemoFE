@@ -6,8 +6,8 @@ import { Save, AlertCircle } from 'lucide-react'
 
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState({
-    storeName: 'Divaksha',
-    storeEmail: 'support@divaksha.com',
+    storeName: 'Hangrow',
+    storeEmail: 'support@hangrow.com',
     storePhone: '',
     currency: 'INR',
     taxRate: 0,
